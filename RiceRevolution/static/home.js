@@ -42,8 +42,44 @@ function renderHomepage() {
     // Append the new div to the main div
     mainDivHandle.appendChild(newDiv);
 
-    // Render the buttons
+    // Render the rest of the page
+    renderHeaders();
     renderButtons();
+}
+
+// Function to render the header and subheader
+function renderHeaders() {
+    // Get the div with ID mainCol
+    let mainColHandle = document.getElementById("mainCol");
+
+    let headerText = "Welcome to Rice Revolution!";
+    let subHeaderText = "Your one-stop shop for all things rice."
+
+    // Create a row
+    let row = document.createElement("div");
+    row.setAttribute("class", "row");
+
+    // Create a column
+    let col = document.createElement("div");
+    col.setAttribute("class", "col text-center");
+
+    // Create the header
+    let header = document.createElement("h1");
+    header.innerHTML = headerText;
+
+    // Create the subheader
+    let subHeader = document.createElement("h3");
+    subHeader.innerHTML = subHeaderText;
+
+    // Append the header and subheader to the column
+    col.appendChild(header);
+    col.appendChild(subHeader);
+
+    // Append the column to the row
+    row.appendChild(col);
+
+    // Append the row to the mainCol
+    mainColHandle.appendChild(row);
 }
 
 // Function to render the buttons
