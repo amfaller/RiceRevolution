@@ -84,7 +84,7 @@ var simplemaps_continentmap_mapdata={
       description: "Brown Rice",
       color: "#3366FF",
       hover_color: "#1c388c",
-      url: "/"  // TODO replace with actual URL
+      url: "/varieties/2"
     },
     EU: {
       name: "Europe",
@@ -112,7 +112,7 @@ var simplemaps_continentmap_mapdata={
       description: "Basmati Rice",
       color: "#FF6633",
       hover_color: "#ac4422",
-      url: "/"  // TODO replace with actual URL
+      url: "/varieties/3"
     },
     ME: {
       name: "Middle East",
@@ -122,12 +122,12 @@ var simplemaps_continentmap_mapdata={
       url: "default"
     },
     OC: {
-      name: "Oceania",
+      name: "Southeast Asia & Oceania",
       description: "Jasmine Rice",
       color: "#FF33CC",
       hover_color: "#b1238d",
-      url: "/"  // TODO replace with actual URL
-    }
+      url: "/varieties/1"
+    },
   },
   // locations: {
   //   "0": {

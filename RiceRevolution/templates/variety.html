@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<script type="module" src="{{ url_for('static', filename = 'variety.js') }}"></script>
+
+<script>
+    let varietyData = {{varietyData|tojson}}
+    console.log('variety');
+</script>
+
+<div class="container" id="main"></div>
+
+{% endblock %}

@@ -15,6 +15,14 @@ def home():
 def varieties():
    return render_template('varieties.html', varietiesData=varietiesData)
 
+# Per-variety page
+@app.route('/varieties/<id>')
+def variety(id):
+   variety = varietiesData.get(id)
+   if variety is None:
+      return "Variety not found", 404
+   return render_template('variety.html', varietyData=variety)
+
 # No Rice Cooker page
 @app.route('/no_rice_cooker')
 def no_rice_cooker():
