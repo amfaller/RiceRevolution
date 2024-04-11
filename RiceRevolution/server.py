@@ -3,6 +3,8 @@ from flask import render_template
 from flask import Response, request, jsonify
 app = Flask(__name__)
 
+from data import varietiesData
+
 # Home page
 @app.route('/')
 def home():
@@ -11,7 +13,7 @@ def home():
 # Varieties page
 @app.route('/varieties')
 def varieties():
-   return render_template('varieties.html')
+   return render_template('varieties.html', varietiesData=varietiesData)
 
 # No Rice Cooker page
 @app.route('/no_rice_cooker')
