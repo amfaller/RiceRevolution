@@ -1,10 +1,10 @@
 import * as functions from './functions.js';
 
 $(document).ready(function() {
-    renderRcHome();
+    renderQuizHome();
 });
 
-function renderRcHome() {
+function renderQuizHome() {
     // Render global margins
     functions.renderMargins();
 }
