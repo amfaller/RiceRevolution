@@ -1,0 +1,23 @@
+/* BEGIN COLOR THEMES */
+
+.dark_grey_background{
+    background-color: #dedede;
+    color: white;
+}
+
+.light_grey_background{
+    background-color: #F2F3F4;
+    color: black;
+}
+
+.dark_blue_background{
+    background-color: #002147;
+    color: white;
+}
+
+.light_yellow_background{
+    background-color: #f7d6a0a8;
+    color: black;
+}
+
+/* END COLOR THEMES */
