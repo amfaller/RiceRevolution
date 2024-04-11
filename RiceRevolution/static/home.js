@@ -24,12 +24,13 @@ function renderHomepage() {
     }
 
 
-    // Create a bootstrap col-10
-    let mainCol = document.createElement("div");
-    mainCol.setAttribute("class", "col-10");
-    mainCol.setAttribute("id", "mainCol");
-    mainCol.innerHTML = "<h1>Hello World</h1>";
-    newDiv.appendChild(mainCol);
+    // Create a bootstrap col-10 to hold the main data
+    {
+        let mainCol = document.createElement("div");
+        mainCol.setAttribute("class", "col-10");
+        mainCol.setAttribute("id", "mainCol");
+        newDiv.appendChild(mainCol);
+    }
 
     // Create a bootstrap col-1 to act as a margin
     {
@@ -41,4 +42,40 @@ function renderHomepage() {
     // Append the new div to the main div
     mainDivHandle.appendChild(newDiv);
 
+    // Render the buttons
+    renderButtons();
+}
+
+// Function to render the buttons
+function renderButtons() {
+    // Get the div with ID mainCol
+    let mainColHandle = document.getElementById("mainCol");
+
+    let numButtons = 3;
+    let buttonNames = ["Varieties", "No Rice Cooker", "Rice Cooker"];
+    let buttonLinks = ["/varieties", "/no_rice_cooker", "/rice_cooker"];   
+
+    for(let i = 0; i < numButtons; i++) {
+        // Create row
+        let row = document.createElement("div");
+        row.setAttribute("class", "row");
+        row.setAttribute("id", "row" + i);
+
+        // Create button in the row
+        let button = document.createElement("button");
+        button.setAttribute("class", "btn btn-primary");
+        button.setAttribute("id", "button" + i);
+        button.innerHTML = buttonNames[i];
+        button.onclick = function() {
+            window.location.href = buttonLinks[i];
+        }
+
+        // Center the button in the row
+        let col = document.createElement("div");
+        col.setAttribute("class", "col text-center");
+
+        col.appendChild(button);
+        row.appendChild(col);
+        mainColHandle.appendChild(row);
+    }
 }
