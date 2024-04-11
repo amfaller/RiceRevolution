@@ -4,11 +4,16 @@
 
 <script type="module" src="{{ url_for('static', filename = 'varieties.js') }}"></script>
 
+
+<script type="text/javascript" src="{{ url_for('static', filename = 'map/mapdata.js') }}"></script>	
+<script type="text/javascript" src="{{ url_for('static', filename = 'map/continentmap.js') }}"></script>
+
 <script>
     let varietiesData = {{varietiesData|tojson}}
     console.log('varities')
 </script>
 
 <div class="container" id="main"></div>
+<div id="map"></div>
 
 {% endblock %}
