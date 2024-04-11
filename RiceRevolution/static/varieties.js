@@ -9,9 +9,8 @@ function renderVarietiesHome() {
     functions.renderMargins();
 
     renderHeaders();
-    renderVarieties();
+    renderVarietiesMap();
 }
-
 
 
 // Function to render the header and subheader
@@ -49,7 +48,7 @@ function renderHeaders() {
     mainColHandle.appendChild(row);
 }
 
-function renderVarieties() {
+function renderVarietiesMap() {
     // Create a button for each element in varietiesData
     let mainColHandle = document.getElementById("mainCol");
 
@@ -64,28 +63,8 @@ function renderVarieties() {
     let mapDiv = document.createElement("div");
     mapDiv.setAttribute("id", "map");
     mapDiv.classList.add("mx-auto");
-    
     col.appendChild(mapDiv);
-
-    // Center the mapDiv element
 
     // Append the row to the mainCol
     mainColHandle.appendChild(row);
-
-    for(let key in varietiesData) {
-        const variety = varietiesData[key];
-
-        const row = document.createElement("div");
-        row.classList.add("row");
-
-        const column = document.createElement("div");
-        column.classList.add("col");
-
-        const button = document.createElement("button");
-        button.textContent = variety.name;
-
-        column.appendChild(button);
-        row.appendChild(column);
-        mainColHandle.appendChild(row);
-    }
 }
