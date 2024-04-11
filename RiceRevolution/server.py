@@ -18,6 +18,11 @@ def varieties():
 def no_rice_cooker():
    return render_template('no_rice_cooker.html')
 
+# Rice Cooker page
+@app.route('/rice_cooker')
+def rice_cooker():
+   return render_template('rice_cooker.html')
+
 
 if __name__ == '__main__':
    app.run(port=8000, debug = True)
