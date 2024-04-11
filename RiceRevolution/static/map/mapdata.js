@@ -7,10 +7,10 @@ var simplemaps_continentmap_mapdata={
     popups: "detect",
     
 		//State defaults
-		state_description: "State description",
+		state_description: "More rice varieties coming soon!",
     state_color: "#88A4BC",
     state_hover_color: "#3B729F",
-    state_url: "https://simplemaps.com",
+    state_url: "",
     border_size: 1.5,
     border_color: "#ffffff",
     all_states_inactive: "no",
@@ -129,24 +129,24 @@ var simplemaps_continentmap_mapdata={
       url: "default"
     }
   },
-  locations: {
-    "0": {
-      name: "New York",
-      lat: 40.71,
-      lng: -74.0059731,
-      description: "default",
-      color: "default",
-      url: "default",
-      size: "default"
-    },
-    "1": {
-      name: "London",
-      lat: 51.5073346,
-      lng: -0.1276831,
-      description: "default",
-      color: "default",
-      url: "default"
-    }
-  },
+  // locations: {
+  //   "0": {
+  //     name: "New York",
+  //     lat: 40.71,
+  //     lng: -74.0059731,
+  //     description: "default",
+  //     color: "default",
+  //     url: "default",
+  //     size: "default"
+  //   },
+  //   "1": {
+  //     name: "London",
+  //     lat: 51.5073346,
+  //     lng: -0.1276831,
+  //     description: "default",
+  //     color: "default",
+  //     url: "default"
+  //   }
+  // },
   labels: {}
 };
