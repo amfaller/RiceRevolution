@@ -65,7 +65,7 @@ var simplemaps_continentmap_mapdata={
 		div: "map",
     auto_load: "yes",
     rotate: "0",
-    url_new_tab: "yes",
+    url_new_tab: "no",
     images_directory: "default",
     import_labels: "no",
     fade_time: 0.1,
@@ -81,10 +81,10 @@ var simplemaps_continentmap_mapdata={
     },
     NA: {
       name: "North America",
-      description: "default",
+      description: "Brown Rice",
       color: "#3366FF",
       hover_color: "#1c388c",
-      url: "default"
+      url: "/"  // TODO replace with actual URL
     },
     EU: {
       name: "Europe",
@@ -109,10 +109,10 @@ var simplemaps_continentmap_mapdata={
     },
     SS: {
       name: "South Asia",
-      description: "default",
+      description: "Basmati Rice",
       color: "#FF6633",
       hover_color: "#ac4422",
-      url: "default"
+      url: "/"  // TODO replace with actual URL
     },
     ME: {
       name: "Middle East",
@@ -123,10 +123,10 @@ var simplemaps_continentmap_mapdata={
     },
     OC: {
       name: "Oceania",
-      description: "default",
+      description: "Jasmine Rice",
       color: "#FF33CC",
       hover_color: "#b1238d",
-      url: "default"
+      url: "/"  // TODO replace with actual URL
     }
   },
   // locations: {
