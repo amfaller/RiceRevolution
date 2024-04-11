@@ -13,6 +13,11 @@ def home():
 def varieties():
    return render_template('varieties.html')
 
+# No Rice Cooker page
+@app.route('/no_rice_cooker')
+def no_rice_cooker():
+   return render_template('no_rice_cooker.html')
+
 
 if __name__ == '__main__':
    app.run(port=8000, debug = True)
