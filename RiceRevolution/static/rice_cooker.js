@@ -5,7 +5,8 @@ const rc_images = {
     RiceCookerImage_closed: "RiceCookerImage_closed",
     RiceCookerImage_open: "RiceCookerImage_open",
     WaterImage: "WaterImage",
-    RawRice: "RawRice"
+    RawRice: "RawRice",
+    LadleWithHand: "LadleWithHand"
 };
 Object.freeze(rc_images);
 
@@ -39,6 +40,9 @@ function renderPage() {
                 break;
             case rc_images.RawRice:
                 functions.displayRawRice();
+                break;
+            case rc_images.LadleWithHand:
+                functions.displayLadleWithHand();
                 break;
             default:
                 console.error("Invalid image type: " + image);

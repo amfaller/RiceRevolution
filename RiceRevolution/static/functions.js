@@ -77,7 +77,7 @@ export function displayRawRice() {
 }
 
 // Helper function to display the stovetop
-export function displayStovetop() {
+export function displayStove() {
     let imgData = imageData["Stove"];
 
     let stovetop = document.createElement("img");
@@ -87,6 +87,19 @@ export function displayStovetop() {
     stovetop.id = imgData.id
 
     document.getElementById("mainCol").appendChild(stovetop);
+}
+
+// Helper function to display the ladle with hand
+export function displayLadleWithHand() {
+    let imgData = imageData["LadleWithHand"];
+
+    let ladle = document.createElement("img");
+
+    ladle.src = imgData.url;
+    ladle.alt = imgData.altText;
+    ladle.id = imgData.id
+
+    document.getElementById("mainCol").appendChild(ladle);
 }
 
 // Helper function to display the back and next buttons

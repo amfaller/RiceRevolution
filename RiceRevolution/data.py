@@ -54,7 +54,12 @@ imageData = {
         "id":"Stove",
         "url":"https://thumbs.dreamstime.com/b/portable-stove-flame-cooking-outdoors-isolated-fire-appliance-preparing-food-dishes-camping-comfortable-291720860.jpg",
         "altText":"Stove Image"
-    }
+    },
+    "LadleWithHand" : {
+        "id":"LadleWithHand",
+        "url":"https://us.123rf.com/450wm/ssstocker/ssstocker2301/ssstocker230100290/197154315-hand-hold-ladle-cartoon-cooking-tool-icon.jpg?ver=6",
+        "altText":"Ladle with Hand Image"
+    },
 }
 
 riceCookerSteps = {
@@ -107,35 +112,35 @@ noRiceCookerSteps = {
         "id": "1",
         "step": "1",
         "subheader": "Measure the desired amount of rice using a measuring cup. Rinse the rice in a separate bowl until the water runs clear, then drain the rice thoroughly.",
-        "instructions": "",
-        "images": ["RawRice"]
+        "instructions": "Drag the water into the rice to wash it.",
+        "images": ["RawRice", "WaterImage"]
     },
     "2" : {
         "id": "2",
         "step": "2",
         "subheader": "Add the rinsed rice to a pot or saucepan. Use the measuring cup to add the appropriate amount of water based on the type of rice being cooked.",
-        "instructions": "",
+        "instructions": "Drag and drop the rice and water into the pot.",
         "images": ["RawRice", "WaterImage", "OpenPot"]
     },
     "3" : {
         "id": "3",
         "step": "3",
-        "subheader": "Place the pot or saucepan on the stovetop over medium heat. Bring the water to a boil, then reduce the heat to low and cover the pot with a lid.",
-        "instructions": "",
-        "images": ["OpenPot", "StoveTop", "ClosedPot"]
+        "subheader": "Place the pot or saucepan on the stovetop over medium heat. Bring the water to a boil, stir to ensure nothing sticks, then reduce the heat to low and cover the pot with a lid.",
+        "instructions": "Drag the pot to the stove and turn on the heat. Stir the pot by dragging the ladle",
+        "images": ["OpenPot", "Stove", "ClosedPot", "LadleWithHand"]
     },
     "4" : {
         "id": "4",
         "step": "4",
         "subheader": "Allow the rice to simmer for the recommended cooking time, typically 15-20 minutes. Avoid lifting the lid while the rice is cooking to prevent steam from escaping.",
-        "instructions": "",
-        "images": ["ClosedPot", "StoveTop"]
+        "instructions": "Set the timer and wait for the rice to cook.",
+        "images": ["ClosedPot", "Stove"]
     },
     "5" : {
         "id": "5",
         "step": "5",
         "subheader": "Once the rice is cooked, remove the pot from the heat and let it rest for a few minutes. Fluff the rice with a fork before serving.",
-        "instructions": "",
+        "instructions": "Click on the pot to open it!",
         "images": ["OpenPot", "ClosedPot"]
     }
 }

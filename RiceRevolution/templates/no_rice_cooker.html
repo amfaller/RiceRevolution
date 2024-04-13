@@ -5,6 +5,9 @@
 <script type="module" src="{{ url_for('static', filename = 'no_rice_cooker.js') }}"></script>
 
 <script>
+    let imageData = {{imageData|tojson}}
+    let stepData = {{stepData|tojson}}
+    let stepLength = {{stepLength|tojson}}
     console.log('no_rice_cooker')
 </script>
 

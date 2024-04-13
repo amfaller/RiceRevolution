@@ -23,10 +23,23 @@ def variety(id):
       return "Variety not found", 404
    return render_template('variety.html', varietyData=variety)
 
-# No Rice Cooker page
+# No Rice Cooker home page
 @app.route('/no_rice_cooker')
 def no_rice_cooker():
-   return render_template('no_rice_cooker.html')
+   stepData = noRiceCookerSteps.get("0")
+   if stepData is None:
+      return "Step not found", 404
+   stepLength = len(noRiceCookerSteps)
+   return render_template('no_rice_cooker.html', imageData=imageData, stepData=stepData, stepLength=stepLength)
+
+# No Rice Cooker step pages
+@app.route('/no_rice_cooker/<step>')
+def no_rice_cooker_step(step):
+   stepData = noRiceCookerSteps.get(step)
+   if stepData is None:
+      return "Step not found", 404
+   stepLength = len(noRiceCookerSteps)
+   return render_template('no_rice_cooker.html', imageData=imageData, stepData=stepData, stepLength=stepLength)
 
 # Rice Cooker home page
 @app.route('/rice_cooker')
