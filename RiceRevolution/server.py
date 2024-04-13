@@ -3,7 +3,15 @@ from flask import render_template
 from flask import Response, request, jsonify
 app = Flask(__name__)
 
+from enum import Enum
 from data import *
+
+class riceStyles(Enum):
+    Normal = 0
+    Congee = 1
+    Crispy = 2
+
+targetStyle = riceStyles.Normal
 
 # Home page
 @app.route('/')
@@ -40,6 +48,15 @@ def no_rice_cooker_step(step):
       return "Step not found", 404
    stepLength = len(noRiceCookerSteps)
    return render_template('no_rice_cooker.html', imageData=imageData, stepData=stepData, stepLength=stepLength)
+
+# Route for rice style
+@app.route('/rice_style', methods=['GET', 'POST'])
+def rice_style():
+   data = request.get_json()
+   print(data)
+   targetStyle = data['style']
+   print(targetStyle)
+   return jsonify(data)
 
 # Rice Cooker home page
 @app.route('/rice_cooker')
