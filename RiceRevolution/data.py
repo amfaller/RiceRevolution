@@ -104,7 +104,7 @@ noRiceCookerSteps = {
     "0": {
         "id": "0",
         "step": "0",
-        "subheader": "Make perfect, fluffy rice with tools you already have. You’ll need your rice, some water, and a pot.",
+        "subheader": "Make perfect rice with tools you already have. You’ll need your rice, some water, and a pot.",
         "instructions": "",
         "images": ["RawRice", "WaterImage", "ClosedPot"]
     },
