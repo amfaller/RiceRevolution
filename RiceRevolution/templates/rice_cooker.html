@@ -5,7 +5,7 @@
 <script type="module" src="{{ url_for('static', filename = 'rice_cooker.js') }}"></script>
 
 <script>
-    let riceCookerData = {{riceCookerData|tojson}}
+    let imageData = {{imageData|tojson}}
     let stepData = {{stepData|tojson}}
     let stepLength = {{stepLength|tojson}}
     console.log('rice_cooker')

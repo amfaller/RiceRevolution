@@ -29,16 +29,16 @@ function renderPage() {
 
         switch (image) {
             case rc_images.RiceCookerImage_closed:
-                displayRiceCookerImage(false);
+                functions.displayRiceCookerImage(false);
                 break;
             case rc_images.RiceCookerImage_open:
-                displayRiceCookerImage(true);
+                functions.displayRiceCookerImage(true);
                 break;
             case rc_images.WaterImage:
-                displayWater();
+                functions.displayWater();
                 break;
             case rc_images.RawRice:
-                displayRawRice();
+                functions.displayRawRice();
                 break;
             default:
                 console.error("Invalid image type: " + image);
@@ -46,7 +46,7 @@ function renderPage() {
     }
 
     // Render back and next buttons
-    displayButtons();
+    functions.displayButtons("/rice_cooker/");
 }
 
 // Helper function to render page headers
@@ -59,86 +59,3 @@ function renderHeaders() {
     subheader.innerHTML = stepData.subheader;
     document.getElementById("mainCol").appendChild(subheader);
 }   
-
-// Helper function to display the rice cooker image
-function displayRiceCookerImage(openLid = false) {
-    let image = document.createElement("img");
-
-    let imageData = openLid ? riceCookerData["RiceCookerImage_open"] : riceCookerData["RiceCookerImage_closed"];
-
-    image.src = imageData.url;
-    image.alt = imageData.altText;
-    image.id = imageData.id
-
-    document.getElementById("mainCol").appendChild(image);
-}
-
-// Helper function to display the water image
-function displayWater() {
-    let imageData = riceCookerData["WaterImage"];
-
-    let water = document.createElement("img");
-    
-    water.src = imageData.url;
-    water.alt = imageData.altText;
-    water.id = imageData.id
-
-    document.getElementById("mainCol").appendChild(water);
-}
-
-// Helper function to display the raw rice image
-function displayRawRice() {
-    let imageData = riceCookerData["RawRice"];
-
-    let rice = document.createElement("img");
-
-    rice.src = imageData.url;
-    rice.alt = imageData.altText;
-    rice.id = imageData.id
-
-    document.getElementById("mainCol").appendChild(rice);
-}
-
-// Helper function to display the back and next buttons
-function displayButtons() {
-
-    // Get the current step
-    let currentStep = parseInt(stepData.step);
-    let nextStep = currentStep + 1;
-    let previousStep = currentStep - 1;
-
-    console.log("Current step: " + currentStep);
-    console.log("Next step: " + nextStep);
-    console.log("Previous step: " + previousStep);
-
-
-    // If we're not on the home page, display a back button
-    if (currentStep != 0) {
-        let backButton = document.createElement("button");
-        backButton.innerHTML = "Back";
-        backButton.onclick = function() {
-            window.location.href = '/rice_cooker/' + previousStep;
-        };
-        document.getElementById("mainCol").appendChild(backButton);
-    }
-
-    // If we're not on the last page, display a next button
-    if (currentStep != stepLength - 1) {
-        let nextButton = document.createElement("button");
-        nextButton.innerHTML = "Next";
-        nextButton.onclick = function() {
-            window.location.href = '/rice_cooker/' + nextStep;
-        };
-        document.getElementById("mainCol").appendChild(nextButton);
-    }
-
-    // If we're on the last page, display a "Quiz me" button
-    if (currentStep == stepLength - 1) {
-        let quizButton = document.createElement("button");
-        quizButton.innerHTML = "Quiz me!";
-        quizButton.onclick = function() {
-            window.location.href = `/quiz`;
-        };
-        document.getElementById("mainCol").appendChild(quizButton);
-    }
-}
