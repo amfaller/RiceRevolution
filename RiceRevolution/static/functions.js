@@ -9,6 +9,21 @@ export function renderMargins() {
     mainDivHandle.appendChild(mainCol);
 }
 
+// Helper function to render instructional page headers
+export function renderHeaders(mainHeaderText) {
+    let header = document.createElement("h1");
+    header.innerHTML = mainHeaderText;
+    document.getElementById("mainCol").appendChild(header);
+
+    let subheader = document.createElement("h2");
+    subheader.innerHTML = stepData.subheader;
+    document.getElementById("mainCol").appendChild(subheader);
+
+    let instructions = document.createElement("p");
+    instructions.innerHTML = stepData.instructions;
+    document.getElementById("mainCol").appendChild(instructions);
+}   
+
 // Helper function to display the rice cooker image
 export function displayRiceCookerImage(openLid = false) {
     let image = document.createElement("img");

@@ -22,7 +22,7 @@ function renderRcHome() {
 
 // Function to render an entire page of the rice cooker guide
 function renderPage() {
-    renderHeaders();
+    functions.renderHeaders("Cooking Rice with a Rice Cooker");
     
     for (let i = 0; i < stepData.images.length; i++) {
         let image = stepData.images[i];
@@ -49,17 +49,4 @@ function renderPage() {
     functions.displayButtons("/rice_cooker/");
 }
 
-// Helper function to render page headers
-function renderHeaders() {
-    let header = document.createElement("h1");
-    header.innerHTML = "Cooking Rice with a Rice Cooker";
-    document.getElementById("mainCol").appendChild(header);
 
-    let subheader = document.createElement("h2");
-    subheader.innerHTML = stepData.subheader;
-    document.getElementById("mainCol").appendChild(subheader);
-
-    let instructions = document.createElement("p");
-    instructions.innerHTML = stepData.instructions;
-    document.getElementById("mainCol").appendChild(instructions);
-}   
