@@ -3,7 +3,7 @@ from flask import render_template
 from flask import Response, request, jsonify
 app = Flask(__name__)
 
-from data import varietiesData, riceCookerData
+from data import *
 
 # Home page
 @app.route('/')
@@ -28,10 +28,21 @@ def variety(id):
 def no_rice_cooker():
    return render_template('no_rice_cooker.html')
 
-# Rice Cooker page
+# Rice Cooker home page
 @app.route('/rice_cooker')
 def rice_cooker():
-   return render_template('rice_cooker.html', riceCookerData=riceCookerData)
+   stepData = riceCookerSteps.get("0")
+   if stepData is None:
+      return "Step not found", 404
+   return render_template('rice_cooker.html', riceCookerData=riceCookerData, stepData=stepData)
+
+# Rice Cooker step pages
+@app.route('/rice_cooker/<step>')
+def rice_cooker_step(step):
+   stepData = riceCookerSteps.get(step)
+   if stepData is None:
+      return "Step not found", 404
+   return render_template('rice_cooker.html', riceCookerData=riceCookerData, stepData=stepData)
 
 # Quiz page
 @app.route('/quiz')

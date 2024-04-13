@@ -8,16 +8,22 @@ function renderRcHome() {
     // Render global margins
     functions.renderMargins();
 
-    renderPage(0);
+    renderPage(stepData.step);
 }
 
 // Function to render an entire page of the rice cooker guide given a step number.
 // Step 0 represents the home page of this section.
 function renderPage(step = 0) {
     renderHeaders();
-    displayRiceCookerImage(true);
-    displayWater();
-    displayRawRice();
+    
+    if (step == 0) {
+        displayRiceCookerImage(true);
+        displayWater();
+        displayRawRice();
+    }
+    else {
+        // TODO
+    }
 }
 
 // Helper function to render page headers
@@ -27,7 +33,7 @@ function renderHeaders() {
     document.getElementById("mainCol").appendChild(header);
 
     let subheader = document.createElement("h2");
-    subheader.innerHTML = "You'll need your rice of choice, some water, and a rice cooker.";
+    subheader.innerHTML = stepData.subheader;
     document.getElementById("mainCol").appendChild(subheader);
 }   
 
