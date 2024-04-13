@@ -47,31 +47,31 @@ riceCookerSteps = {
         "id": "0",
         "step": "0",
         "subheader": "You'll need your rice of choice, some water, and a rice cooker.",
-        "image": "RiceCookerImage_closed"
+        "images": ["RiceCookerImage_closed", "WaterImage", "RawRice"]
     },
     "1": {
         "id": "1",
         "step": "1",
         "subheader": "Measure the desired amount of rice using the measuring cup provided with the rice cooker. Rinse the rice in a separate bowl until the water runs clear, then drain the rice thoroughly.",
-        "image": "RawRice"
+        "images": ["RawRice"]
     },
     "2": {
         "id": "2",
         "step": "2",
         "subheader": "Add the rinsed rice to the inner pot of the rice cooker. Use the measuring cup to add the appropriate amount of water based on the type of rice being cooked.",
-        "image": "WaterImage"
+        "images": ["RawRice", "WaterImage"]
     },
     "3": {
         "id": "3",
         "step": "3",
         "subheader": "Place the inner pot into the rice cooker and close the lid securely. Select the appropriate cooking setting based on the type of rice being cooked.",
-        "image": "RiceCookerImage_closed"
+        "images": ["RiceCookerImage_closed"]
     },
     "4": {
         "id": "4",
         "step": "4",
         "subheader": "Once the rice cooker indicates that the rice is ready, allow the rice to rest for a few minutes before fluffing it with a fork. Serve the cooked rice as desired.",
-        "image": "RiceCookerImage_open"
+        "images": ["RiceCookerImage_open"]
     }
 }
 

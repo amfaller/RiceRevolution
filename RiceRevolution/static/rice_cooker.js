@@ -1,5 +1,13 @@
 import * as functions from './functions.js';
 
+const rc_images = {
+    RiceCookerImage_closed: "RiceCookerImage_closed",
+    RiceCookerImage_open: "RiceCookerImage_open",
+    WaterImage: "WaterImage",
+    RawRice: "RawRice"
+};
+Object.freeze(rc_images);
+
 $(document).ready(function() {
     renderRcHome();
 });
@@ -8,21 +16,33 @@ function renderRcHome() {
     // Render global margins
     functions.renderMargins();
 
-    renderPage(stepData.step);
+    renderPage();
 }
 
 // Function to render an entire page of the rice cooker guide given a step number.
 // Step 0 represents the home page of this section.
-function renderPage(step = 0) {
+function renderPage() {
     renderHeaders();
     
-    if (step == 0) {
-        displayRiceCookerImage(true);
-        displayWater();
-        displayRawRice();
-    }
-    else {
-        // TODO
+    for (let i = 0; i < stepData.images.length; i++) {
+        let image = stepData.images[i];
+
+        switch (image) {
+            case rc_images.RiceCookerImage_closed:
+                displayRiceCookerImage(false);
+                break;
+            case rc_images.RiceCookerImage_open:
+                displayRiceCookerImage(true);
+                break;
+            case rc_images.WaterImage:
+                displayWater();
+                break;
+            case rc_images.RawRice:
+                displayRawRice();
+                break;
+            default:
+                console.error("Invalid image type: " + image);
+        }
     }
 }
 
