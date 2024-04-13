@@ -1,5 +1,6 @@
 import * as functions from './functions.js';
 
+// Software-defined equivalent of images used for this section
 const rc_images = {
     RiceCookerImage_closed: "RiceCookerImage_closed",
     RiceCookerImage_open: "RiceCookerImage_open",
@@ -19,8 +20,7 @@ function renderRcHome() {
     renderPage();
 }
 
-// Function to render an entire page of the rice cooker guide given a step number.
-// Step 0 represents the home page of this section.
+// Function to render an entire page of the rice cooker guide
 function renderPage() {
     renderHeaders();
     
@@ -44,6 +44,9 @@ function renderPage() {
                 console.error("Invalid image type: " + image);
         }
     }
+
+    // Render back and next buttons
+    displayButtons();
 }
 
 // Helper function to render page headers
@@ -94,4 +97,48 @@ function displayRawRice() {
     rice.id = imageData.id
 
     document.getElementById("mainCol").appendChild(rice);
+}
+
+// Helper function to display the back and next buttons
+function displayButtons() {
+
+    // Get the current step
+    let currentStep = parseInt(stepData.step);
+    let nextStep = currentStep + 1;
+    let previousStep = currentStep - 1;
+
+    console.log("Current step: " + currentStep);
+    console.log("Next step: " + nextStep);
+    console.log("Previous step: " + previousStep);
+
+
+    // If we're not on the home page, display a back button
+    if (currentStep != 0) {
+        let backButton = document.createElement("button");
+        backButton.innerHTML = "Back";
+        backButton.onclick = function() {
+            window.location.href = '/rice_cooker/' + previousStep;
+        };
+        document.getElementById("mainCol").appendChild(backButton);
+    }
+
+    // If we're not on the last page, display a next button
+    if (currentStep != stepLength - 1) {
+        let nextButton = document.createElement("button");
+        nextButton.innerHTML = "Next";
+        nextButton.onclick = function() {
+            window.location.href = '/rice_cooker/' + nextStep;
+        };
+        document.getElementById("mainCol").appendChild(nextButton);
+    }
+
+    // If we're on the last page, display a "Quiz me" button
+    if (currentStep == stepLength - 1) {
+        let quizButton = document.createElement("button");
+        quizButton.innerHTML = "Quiz me!";
+        quizButton.onclick = function() {
+            window.location.href = `/quiz`;
+        };
+        document.getElementById("mainCol").appendChild(quizButton);
+    }
 }

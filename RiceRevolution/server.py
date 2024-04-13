@@ -34,7 +34,8 @@ def rice_cooker():
    stepData = riceCookerSteps.get("0")
    if stepData is None:
       return "Step not found", 404
-   return render_template('rice_cooker.html', riceCookerData=riceCookerData, stepData=stepData)
+   stepLength = len(riceCookerSteps)
+   return render_template('rice_cooker.html', riceCookerData=riceCookerData, stepData=stepData, stepLength=stepLength)
 
 # Rice Cooker step pages
 @app.route('/rice_cooker/<step>')
@@ -42,7 +43,8 @@ def rice_cooker_step(step):
    stepData = riceCookerSteps.get(step)
    if stepData is None:
       return "Step not found", 404
-   return render_template('rice_cooker.html', riceCookerData=riceCookerData, stepData=stepData)
+   stepLength = len(riceCookerSteps)
+   return render_template('rice_cooker.html', riceCookerData=riceCookerData, stepData=stepData, stepLength=stepLength)
 
 # Quiz page
 @app.route('/quiz')
