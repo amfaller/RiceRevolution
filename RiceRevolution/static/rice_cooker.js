@@ -58,4 +58,8 @@ function renderHeaders() {
     let subheader = document.createElement("h2");
     subheader.innerHTML = stepData.subheader;
     document.getElementById("mainCol").appendChild(subheader);
+
+    let instructions = document.createElement("p");
+    instructions.innerHTML = stepData.instructions;
+    document.getElementById("mainCol").appendChild(instructions);
 }   

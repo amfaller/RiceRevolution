@@ -22,6 +22,19 @@ export function displayRiceCookerImage(openLid = false) {
     document.getElementById("mainCol").appendChild(image);
 }
 
+// Helper function to display the pots
+export function displayPots(openLid = false) {
+    let imgData = openLid ? imageData["OpenPot"] : imageData["ClosedPot"];
+
+    let pots = document.createElement("img");
+
+    pots.src = imgData.url;
+    pots.alt = imgData.altText;
+    pots.id = imgData.id
+
+    document.getElementById("mainCol").appendChild(pots);
+}
+
 // Helper function to display the water image
 export function displayWater() {
     let imgData = imageData["WaterImage"];
@@ -46,6 +59,19 @@ export function displayRawRice() {
     rice.id = imgData.id
 
     document.getElementById("mainCol").appendChild(rice);
+}
+
+// Helper function to display the stovetop
+export function displayStovetop() {
+    let imgData = imageData["Stove"];
+
+    let stovetop = document.createElement("img");
+
+    stovetop.src = imgData.url;
+    stovetop.alt = imgData.altText;
+    stovetop.id = imgData.id
+
+    document.getElementById("mainCol").appendChild(stovetop);
 }
 
 // Helper function to display the back and next buttons
