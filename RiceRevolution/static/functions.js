@@ -117,6 +117,58 @@ export function displayLadleWithHand() {
     document.getElementById("mainCol").appendChild(ladle);
 }
 
+// Helper function to display BakingSheet
+export function displayBakingSheet() {
+    let imgData = imageData["BakingSheet"];
+
+    let sheet = document.createElement("img");
+
+    sheet.src = imgData.url;
+    sheet.alt = imgData.altText;
+    sheet.id = imgData.id
+
+    document.getElementById("mainCol").appendChild(sheet);
+}
+
+// Helper function to display FryingPan
+export function displayFryingPan() {
+    let imgData = imageData["FryingPan"];
+
+    let pan = document.createElement("img");
+
+    pan.src = imgData.url;
+    pan.alt = imgData.altText;
+    pan.id = imgData.id
+
+    document.getElementById("mainCol").appendChild(pan);
+}
+
+// Helper function to display the Oven
+export function displayOven() {
+    let imgData = imageData["Oven"];
+
+    let oven = document.createElement("img");
+
+    oven.src = imgData.url;
+    oven.alt = imgData.altText;
+    oven.id = imgData.id
+
+    document.getElementById("mainCol").appendChild(oven);
+}
+
+// Helper function to display the CrispyRice
+export function displayCrispyRice() {
+    let imgData = imageData["CrispyRice"];
+
+    let crispy = document.createElement("img");
+
+    crispy.src = imgData.url;
+    crispy.alt = imgData.altText;
+    crispy.id = imgData.id
+
+    document.getElementById("mainCol").appendChild(crispy);
+}
+
 // Helper function to display the back and next buttons
 export function displayButtons(route) {
 

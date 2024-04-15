@@ -7,7 +7,11 @@ const nrc_images = {
     WaterImage: "WaterImage",
     RawRice: "RawRice",
     Stove: "Stove",
-    LadleWithHand: "LadleWithHand"
+    LadleWithHand: "LadleWithHand",
+    BakingSheet: "BakingSheet",
+    FryingPan: "FryingPan",
+    Oven: "Oven",
+    CrispyRice: "CrispyRice"
 };
 Object.freeze(nrc_images);
 
@@ -82,6 +86,18 @@ function renderPage() {
                 break;
             case nrc_images.LadleWithHand:
                 functions.displayLadleWithHand();
+                break;
+            case nrc_images.BakingSheet:
+                functions.displayBakingSheet();
+                break;
+            case nrc_images.FryingPan:
+                functions.displayFryingPan();
+                break;
+            case nrc_images.Oven:
+                functions.displayOven();
+                break;
+            case nrc_images.CrispyRice:
+                functions.displayCrispyRice();
                 break;
             default:
                 console.error("Invalid image type: " + image);
