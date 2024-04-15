@@ -15,6 +15,15 @@ targetStyle = 0
 # Basic array to store timestamps
 timestamps = []
 
+# Quiz IDs because working with enums in python is terrible
+# 0 - Varieties
+# 1 - Cooking
+quizIDs = [0, 1]
+quizId = 0
+varietiesQuizScore = 0
+cookingQuizScore = 0
+maxScore = 0
+
 # Home page
 @app.route('/')
 def home():
@@ -110,7 +119,36 @@ def rice_cooker_step(step):
 # Quiz page
 @app.route('/quiz')
 def quiz():
-   return render_template('quiz.html')
+   return render_template('quiz.html', questionData=None)
+
+# Per-question page
+@app.route('/quiz/<id>')
+def quiz_question(id):
+   global quizId
+   global varietiesQuizScore
+   global cookingQuizScore
+   global maxScore
+
+   question = None
+   if quizId == 0:
+      question = quizData_Varieties.get(id)
+      maxScore = len(quizData_Varieties)
+   elif quizId == 1:
+      question = quizData_Cooking.get(id)
+      maxScore = len(quizData_Cooking)
+
+   if question is None:
+      return "Question not found", 404
+   return render_template('quiz.html', questionData=question)
+
+# Route for quiz selection
+@app.route('/quiz_selection', methods=['GET', 'POST'])
+def quiz_selection():
+   global quizId
+   data = request.get_json()
+   print(data)
+   quizId = data['quiz']
+   return jsonify(data)
 
 # Route to see logs
 @app.route('/logs')

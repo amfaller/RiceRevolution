@@ -275,3 +275,69 @@ noRiceCookerSteps_Crispy = {
         "images": ["CrispyRice"]
     }
 }
+
+quizData_Varieties = {
+     "1": {
+        "id": "1",
+        "question": "Varieties Q1",
+        "answers": ["A1", "A2"],
+        "correctAnswerIdx": "0"
+    },
+    "2": {
+        "id": "2",
+        "question": "Varieties Q2",
+        "answers": ["A1", "A2"],
+        "correctAnswerIdx": "0"
+    },
+    "3": {
+        "id": "3",
+        "question": "Varieties Q3",
+        "answers": ["A1", "A2"],
+        "correctAnswerIdx": "0"
+    },
+    "4": {
+        "id": "4",
+        "question": "Varieties Q4",
+        "answers": ["A1", "A2"],
+        "correctAnswerIdx": "0"
+    },
+    "5": {
+        "id": "5",
+        "question": "Varieties Q5",
+        "answers": ["A1", "A2"],
+        "correctAnswerIdx": "0"
+    }
+}
+
+quizData_Cooking = {
+    "1": {
+        "id": "1",
+        "question": "Cooking Q1",
+        "answers": ["B1", "B2"],
+        "correctAnswerIdx": "0"
+    },
+    "2": {
+        "id": "2",
+        "question": "Cooking Q2",
+        "answers": ["B1", "B2"],
+        "correctAnswerIdx": "0"
+    },
+    "3": {
+        "id": "3",
+        "question": "Cooking Q3",
+        "answers": ["B1", "B2"],
+        "correctAnswerIdx": "0"
+    },
+    "4": {
+        "id": "4",
+        "question": "Cooking Q4",
+        "answers": ["B1", "B2"],
+        "correctAnswerIdx": "0"
+    },
+    "5": {
+        "id": "5",
+        "question": "Cooking Q5",
+        "answers": ["B1", "B2"],
+        "correctAnswerIdx": "0"
+    }
+}

@@ -5,6 +5,7 @@
 <script type="module" src="{{ url_for('static', filename = 'quiz.js') }}"></script>
 
 <script>
+    let questionData = {{ questionData | tojson }};
     console.log('quiz')
 </script>
 
