@@ -27,17 +27,68 @@ function renderQuestion() {
     header.innerHTML = questionData.question;
     document.getElementById("mainCol").appendChild(header);
 
-    // Render answer choices
-    for (let i = 0; i < questionData.answers.length; i++) {
-        let answer = questionData.answers[i];
+    // If the question is draggable:
+    if (questionData.isDragQ) {
+        // Create a div for each draggable element
+        for (let i = 0; i < questionData.answers.length; i++) {
+            let draggable = questionData.answers[i];
 
-        let answerButton = document.createElement("button");
-        answerButton.innerHTML = answer;
-        answerButton.onclick = function() {
-            postAnswer(i);
+            let draggableDiv = document.createElement("div");
+            draggableDiv.innerHTML = draggable;
+            draggableDiv.setAttribute("draggable", "true");
+            draggableDiv.setAttribute("ondragstart", "drag(event)");
+
+            document.getElementById("mainCol").appendChild(draggableDiv);
         }
 
-        document.getElementById("mainCol").appendChild(answerButton);
+        // Add a submit button
+        let submitButton = document.createElement("button");
+        submitButton.innerHTML = "Submit";
+        submitButton.onclick = function() {
+            postDraggableAnswer();
+        }
+        document.getElementById("mainCol").appendChild(submitButton);
+    }
+    else {
+        // Render answer choices
+        for (let i = 0; i < questionData.answers.length; i++) {
+            let answer = questionData.answers[i];
+
+            let answerButton = document.createElement("button");
+            answerButton.innerHTML = answer;
+            answerButton.onclick = function() {
+                postAnswer(i);
+            }
+
+            document.getElementById("mainCol").appendChild(answerButton);
+        }
+    }
+}
+
+function postDraggableAnswer() {
+    // TODO check that answer is correct
+
+    $.ajax({
+        url: "/submit_answer",
+        method: "POST",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify({
+            correct: true}),
+        success: function(data) {
+            console.log(data);
+        }
+        });
+
+    // Redirect to next question if not at max
+    if (parseInt(questionData.id) < 5) {
+        window.location.href = "/quiz/" + (parseInt(questionData.id) + 1);
+    } 
+    else {
+        // Sleep for 250 ms
+        setTimeout(function() {
+            window.location.href = "/quiz";
+        }, 125);
     }
 }
 

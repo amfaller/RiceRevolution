@@ -281,31 +281,36 @@ quizData_Varieties = {
         "id": "1",
         "question": "Varieties Q1",
         "answers": ["A1", "A2"],
-        "correctAnswerIdx": "0"
+        "correctAnswerIdx": "0",
+        "isDragQ": False
     },
     "2": {
         "id": "2",
         "question": "Varieties Q2",
         "answers": ["A1", "A2"],
-        "correctAnswerIdx": "0"
+        "correctAnswerIdx": "0",
+        "isDragQ": False
     },
     "3": {
         "id": "3",
         "question": "Varieties Q3",
-        "answers": ["A1", "A2"],
-        "correctAnswerIdx": "0"
+        "answers": ["A DragMe1", "A DragMe2"],
+        "correctAnswerIdx": ["1", "0"],
+        "isDragQ": True
     },
     "4": {
         "id": "4",
         "question": "Varieties Q4",
         "answers": ["A1", "A2"],
-        "correctAnswerIdx": "0"
+        "correctAnswerIdx": "0",
+        "isDragQ": False
     },
     "5": {
         "id": "5",
         "question": "Varieties Q5",
         "answers": ["A1", "A2"],
-        "correctAnswerIdx": "0"
+        "correctAnswerIdx": "0",
+        "isDragQ": False
     }
 }
 
@@ -314,30 +319,35 @@ quizData_Cooking = {
         "id": "1",
         "question": "Cooking Q1",
         "answers": ["B1", "B2"],
-        "correctAnswerIdx": "0"
+        "correctAnswerIdx": "0",
+        "isDragQ": False
     },
     "2": {
         "id": "2",
         "question": "Cooking Q2",
         "answers": ["B1", "B2"],
-        "correctAnswerIdx": "0"
+        "correctAnswerIdx": "0",
+        "isDragQ": False
     },
     "3": {
         "id": "3",
         "question": "Cooking Q3",
         "answers": ["B1", "B2"],
-        "correctAnswerIdx": "0"
+        "correctAnswerIdx": "0",
+        "isDragQ": False
     },
     "4": {
         "id": "4",
         "question": "Cooking Q4",
-        "answers": ["B1", "B2"],
-        "correctAnswerIdx": "0"
+        "answers": ["B DragMe1", "B DragMe2", "B DragMe3"],
+        "correctAnswerIdx": ["1", "0", "2"],
+        "isDragQ": True
     },
     "5": {
         "id": "5",
         "question": "Cooking Q5",
         "answers": ["B1", "B2"],
-        "correctAnswerIdx": "0"
+        "correctAnswerIdx": "0",
+        "isDragQ": False
     }
 }
