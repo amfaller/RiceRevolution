@@ -150,6 +150,25 @@ def quiz_selection():
    quizId = data['quiz']
    return jsonify(data)
 
+# Route for answer submission
+@app.route('/submit_answer', methods=['POST'])
+def submit_answer():
+   global quizId
+   global varietiesQuizScore
+   global cookingQuizScore
+   global maxScore
+
+   data = request.get_json()
+   print(data)
+   if quizId == 0:
+      if data['correct']:
+         varietiesQuizScore += 1
+   elif quizId == 1:
+      if data['correct']:
+         cookingQuizScore += 1
+
+   return jsonify(data)
+
 # Route to see logs
 @app.route('/logs')
 def logs():

@@ -11,9 +11,58 @@ function renderQuizHome() {
 
     if (questionData) {
         console.log(questionData);
+        renderQuestion();
     }
     else {
         displaySelectionButtons();
+    }
+}
+
+function renderQuestion() {
+    // Render global margins
+    functions.renderMargins();
+
+    // Render question header
+    let header = document.createElement("h1");
+    header.innerHTML = questionData.question;
+    document.getElementById("mainCol").appendChild(header);
+
+    // Render answer choices
+    for (let i = 0; i < questionData.answers.length; i++) {
+        let answer = questionData.answers[i];
+
+        let answerButton = document.createElement("button");
+        answerButton.innerHTML = answer;
+        answerButton.onclick = function() {
+            postAnswer(i);
+        }
+
+        document.getElementById("mainCol").appendChild(answerButton);
+    }
+}
+
+function postAnswer(value) {
+    if (value == questionData.correctAnswerIdx) {
+        // Publish via AJAX the current timestamp to the server
+        $.ajax({
+            url: "/submit_answer",
+            method: "POST",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify({
+                correct: true}),
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    }
+
+    // Redirect to next question if not at max
+    if (parseInt(questionData.id) < 5) {
+        window.location.href = "/quiz/" + (parseInt(questionData.id) + 1);
+    } 
+    else {
+        window.location.href = "/quiz";
     }
 }
 
