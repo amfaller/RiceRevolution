@@ -119,7 +119,9 @@ def rice_cooker_step(step):
 # Quiz page
 @app.route('/quiz')
 def quiz():
-   return render_template('quiz.html', questionData=None)
+   global varietiesQuizScore
+   global cookingQuizScore
+   return render_template('quiz.html', questionData=None, varietiesQuizScore=varietiesQuizScore, cookingQuizScore=cookingQuizScore, maxVarScore=len(quizData_Varieties), maxCooScore=len(quizData_Cooking))
 
 # Per-question page
 @app.route('/quiz/<id>')
@@ -139,15 +141,22 @@ def quiz_question(id):
 
    if question is None:
       return "Question not found", 404
-   return render_template('quiz.html', questionData=question)
+   return render_template('quiz.html', questionData=question, varietiesQuizScore=None, cookingQuizScore=None, maxVarScore=None, maxCooScore=None)
 
 # Route for quiz selection
 @app.route('/quiz_selection', methods=['GET', 'POST'])
 def quiz_selection():
    global quizId
+   global varietiesQuizScore
+   global cookingQuizScore
+   
    data = request.get_json()
-   print(data)
+   
    quizId = data['quiz']
+   if quizId == 0:
+      varietiesQuizScore = 0
+   elif quizId == 1:
+      cookingQuizScore = 0
    return jsonify(data)
 
 # Route for answer submission

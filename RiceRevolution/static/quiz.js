@@ -62,7 +62,10 @@ function postAnswer(value) {
         window.location.href = "/quiz/" + (parseInt(questionData.id) + 1);
     } 
     else {
-        window.location.href = "/quiz";
+        // Sleep for 250 ms
+        setTimeout(function() {
+            window.location.href = "/quiz";
+        }, 125);
     }
 }
 
@@ -74,23 +77,36 @@ function displaySelectionButtons() {
     const varietiesQuizRow = document.createElement('div');
     varietiesQuizRow.classList.add('row');
 
-    // Create Cooking Quiz button
-    const cookingQuizButton = document.createElement('button');
-    cookingQuizButton.innerText = 'Cooking Quiz';
-    cookingQuizButton.onclick = function () {
-        postQuizSelection(0);
+    {
+        // Create Varieties Quiz button
+        const varietiesQuizButton = document.createElement('button');
+        varietiesQuizButton.innerText = 'Varieties Quiz';
+        varietiesQuizButton.onclick = function () {
+            postQuizSelection(0);
+        }
+
+        // Create Cooking Quiz button
+        const cookingQuizButton = document.createElement('button');
+        cookingQuizButton.innerText = 'Cooking Quiz';
+        cookingQuizButton.onclick = function () {
+            postQuizSelection(1);
+        }
+
+        // Append buttons to rows
+        cookingQuizRow.appendChild(cookingQuizButton);
+        varietiesQuizRow.appendChild(varietiesQuizButton);
     }
 
-    // Create Varieties Quiz button
-    const varietiesQuizButton = document.createElement('button');
-    varietiesQuizButton.innerText = 'Varieties Quiz';
-    varietiesQuizButton.onclick = function () {
-        postQuizSelection(1);
-    }
+    {
+        // Create scores text
+        const cooScore = document.createElement('p');
+        cooScore.innerText = "Previous score: " + cookingQuizScore + "/" +  maxCooScore;
+        cookingQuizRow.appendChild(cooScore);
 
-    // Append buttons to rows
-    cookingQuizRow.appendChild(cookingQuizButton);
-    varietiesQuizRow.appendChild(varietiesQuizButton);
+        const varScore = document.createElement('p');
+        varScore.innerText = "Previous score: " + varietiesQuizScore + "/" +  maxVarScore;
+        varietiesQuizRow.appendChild(varScore);
+    }
 
     // Append rows to document
     let mainCol = document.getElementById("mainCol");
@@ -113,6 +129,9 @@ function postQuizSelection(value) {
         }
     });
 
-    // Redirect to /quiz/1
-    window.location.href = "/quiz/1";
+    // Sleep for a quarter of a second
+    // Sleep for 250 ms
+    setTimeout(function() {
+        window.location.href = "/quiz/1";
+    }, 125);
 }
