@@ -112,6 +112,11 @@ def rice_cooker_step(step):
 def quiz():
    return render_template('quiz.html')
 
+# Route to see logs
+@app.route('/logs')
+def logs():
+   return render_template('logs.html', timestamps=timestamps)
+
 # Endpoint for logging timestamps
 @app.route('/enter_log', methods=['POST'])
 def log():
