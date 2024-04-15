@@ -11,14 +11,8 @@ const nrc_images = {
 };
 Object.freeze(nrc_images);
 
-const nrc_styles = {
-    Normal: 0,
-    Congee: 1,
-    Crispy: 2,
-};
-Object.freeze(nrc_styles);
+let riceStyles = [0, 1, 2];
 
-let targetStyle = nrc_styles.Normal;
 
 $(document).ready(function() {
     renderNrcHome();
@@ -40,19 +34,29 @@ function renderNrcHome() {
 // Function to render an entire page of the rice cooker guide
 function renderPage() {
     let headerText = "Cooking "
+    targetStyle = parseInt(targetStyle);
+    
 
-    switch (targetStyle) {
-        case nrc_styles.Normal:
-            headerText += "Normal Rice without a Rice Cooker";
-            break;
-        case nrc_styles.Congee:
-            headerText += "Congee without a Rice Cooker";
-            break;
-        case nrc_styles.Crispy:
-            headerText += "Crispy Rice without a Rice Cooker";
-        default:
-            console.error("Invalid style: " + targetStyle);
+    console.log("Rendering page for style: " + targetStyle);
+    console.log(targetStyle);
+    console.log(typeof targetStyle);
+
+    if (isNaN(targetStyle)) {
+        console.error("Invalid style: " + targetStyle);
+        return;
     }
+
+    if (targetStyle == 0) { 
+        headerText += "Normal Rice";
+    }
+    else if (targetStyle == 1) {
+        headerText += "Congee";
+    }
+    else if (targetStyle == 2) {
+        headerText += "Crispy Rice";
+    }
+
+    headerText += " without a Rice Cooker";
 
     functions.renderHeaders(headerText);
     
@@ -96,7 +100,7 @@ function renderStyleSelection() {
     let normalButton = document.createElement("button");
     normalButton.innerText = "Normal";
     normalButton.onclick = function() {
-        targetStyle = nrc_styles.Normal;
+        targetStyle = riceStyles[0];
         publishStyle();
         functions.renderMargins();
         renderPage();
@@ -105,7 +109,7 @@ function renderStyleSelection() {
     let congeeButton = document.createElement("button");
     congeeButton.innerText = "Congee";
     congeeButton.onclick = function() {
-        targetStyle = nrc_styles.Congee;
+        targetStyle = riceStyles[1];
         publishStyle();
         functions.renderMargins();
         renderPage();
@@ -114,7 +118,7 @@ function renderStyleSelection() {
     let crispyButton = document.createElement("button");
     crispyButton.innerText = "Crispy";
     crispyButton.onclick = function() {
-        targetStyle = nrc_styles.Crispy;
+        targetStyle = riceStyles[2];
         publishStyle();
         functions.renderMargins();
         renderPage();

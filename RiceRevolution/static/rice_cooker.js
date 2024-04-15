@@ -6,7 +6,11 @@ const rc_images = {
     RiceCookerImage_open: "RiceCookerImage_open",
     WaterImage: "WaterImage",
     RawRice: "RawRice",
-    LadleWithHand: "LadleWithHand"
+    LadleWithHand: "LadleWithHand",
+    BakingSheet: "BakingSheet",
+    FryingPan: "FryingPan",
+    Oven: "Oven",
+    CrispyRice: "CrispyRice",
 };
 Object.freeze(rc_images);
 
