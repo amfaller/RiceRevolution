@@ -120,8 +120,6 @@ riceCookerSteps = {
     }
 }
 
-# TODO: This is the 'normal' style cooking instructions. 
-# This needs to be duplicated and modified for the other styles.
 noRiceCookerSteps = {
     "0": {
         "id": "0",
