@@ -15,6 +15,7 @@ let riceStyles = [0, 1, 2];
 
 
 $(document).ready(function() {
+    functions.logData();
     renderNrcHome();
 });
 

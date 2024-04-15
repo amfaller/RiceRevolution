@@ -15,6 +15,7 @@ const rc_images = {
 Object.freeze(rc_images);
 
 $(document).ready(function() {
+    functions.logData();
     renderRcHome();
 });
 

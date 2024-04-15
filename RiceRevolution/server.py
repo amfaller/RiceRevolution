@@ -10,8 +10,10 @@ from data import *
 # 1 - Congee
 # 2 - Crispy
 riceStyles = [0, 1, 2]
-
 targetStyle = 0
+
+# Basic array to store timestamps
+timestamps = []
 
 # Home page
 @app.route('/')
@@ -109,6 +111,15 @@ def rice_cooker_step(step):
 @app.route('/quiz')
 def quiz():
    return render_template('quiz.html')
+
+# Endpoint for logging timestamps
+@app.route('/enter_log', methods=['POST'])
+def log():
+   data = request.get_json()
+   # Insert a page-timestamp pair into the timestamps array
+   timestamps.append(data)
+   print(data)
+   return jsonify(data)
 
 
 if __name__ == '__main__':

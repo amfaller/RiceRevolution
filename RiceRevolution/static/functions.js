@@ -1,3 +1,18 @@
+export function logData() {
+    // Publish via AJAX the current timestamp to the server
+    $.ajax({
+        url: "/enter_log",
+        method: "POST",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify({
+            page: window.location.pathname, timestamp: new Date().toISOString()}),
+        success: function(data) {
+            console.log(data);
+        }
+    });
+}  
+
 export function renderMargins() {
     let mainDivHandle = document.getElementById("main");
     mainDivHandle.innerHTML = "";
