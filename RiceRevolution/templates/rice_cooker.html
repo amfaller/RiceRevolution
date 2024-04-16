@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<script type="module" src="{{ url_for('static', filename = 'rice_cooker.js') }}"></script>
+
+<script>
+    let imageData = {{imageData|tojson}}
+    let stepData = {{stepData|tojson}}
+    let stepLength = {{stepLength|tojson}}
+    console.log('rice_cooker')
+</script>
+
+<div class="container" id="main"></div>
+
+{% endblock %}

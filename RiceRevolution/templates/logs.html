@@ -1,0 +1,15 @@
+
+{% extends "layout.html" %}
+
+{% block content %}
+
+<script type="module" src="{{ url_for('static', filename = 'logs.js') }}"></script>
+
+<script>
+    let timestamps = {{timestamps|tojson}}
+    console.log('logs')
+</script>
+
+<div class="container" id="main"></div>
+
+{% endblock %}
