@@ -18,23 +18,7 @@ function renderQuizHome() {
     }
 }
 
-function allowDrop(event) {
-    console.log("Dropping");
-    event.preventDefault();
-    eventDefault();
-}
-
-function drag(event) {
-    console.log("Dragging");
-    event.dataTransfer.setData("text", event.target.id);
-}
-
-function drop(event) {
-    console.log("Dropped");
-    event.preventDefault();
-    var data = event.dataTransfer.getData("text");
-    event.target.appendChild(document.getElementById(data));
-}
+let dragDataArray = [];
 
 function renderQuestion() {
     // Render global margins
@@ -134,6 +118,9 @@ function renderQuestion() {
 
                         // Append the col-2 to the row
                         row.appendChild(col1);
+
+                        // Add the id (i.e. index) of the draggable element to the dragDataArray
+                        dragDataArray.push(draggableId.split("-")[1]);
                     }
                 });
 
@@ -143,6 +130,14 @@ function renderQuestion() {
             // Append row
             document.getElementById("mainCol").appendChild(row);
         }
+        
+        // Add a reset button 
+        let resetButton = document.createElement("button");
+        resetButton.innerHTML = "Reset";
+        resetButton.onclick = function() {
+            location.reload();
+        }
+        document.getElementById("mainCol").appendChild(resetButton);
 
         // Add a submit button
         let submitButton = document.createElement("button");
@@ -169,19 +164,29 @@ function renderQuestion() {
 }
 
 function postDraggableAnswer() {
-    // TODO check that answer is correct
-
-    $.ajax({
-        url: "/submit_answer",
-        method: "POST",
-        dataType: "json",
-        contentType: "application/json",
-        data: JSON.stringify({
-            correct: true}),
-        success: function(data) {
-            console.log(data);
+    // Check that the dragDataArray is equal to questionData.correctAnswerIdx
+    let correct = true;
+    for (let i = 0; i < dragDataArray.length; i++) {
+        if (parseInt(dragDataArray[i]) != questionData.correctAnswerIdx[i]) {
+            correct = false;
+            break;
         }
-        });
+    }
+    console.log("Correct: " + correct)
+
+    if (correct) {
+        $.ajax({
+            url: "/submit_answer",
+            method: "POST",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify({
+                correct: true}),
+            success: function(data) {
+                console.log(data);
+            }
+            });
+    }
 
     // Redirect to next question if not at max
     if (parseInt(questionData.id) < 5) {
