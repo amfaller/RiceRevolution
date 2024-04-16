@@ -279,37 +279,38 @@ noRiceCookerSteps_Crispy = {
 quizData_Varieties = {
      "1": {
         "id": "1",
-        "question": "Varieties Q1",
-        "answers": ["A1", "A2"],
-        "correctAnswerIdx": "0",
+        "question": "Which type of rice is known for its fragrant aroma and nutty flavor?",
+        "answers": ["Brown Rice", "Jasmine Rice", "Basmati Rice"],
+        "correctAnswerIdx": "1",
         "isDragQ": False
     },
     "2": {
         "id": "2",
-        "question": "Varieties Q2",
-        "answers": ["A1", "A2"],
-        "correctAnswerIdx": "0",
+        "question": "Which type of rice is commonly used in Indian cuisine, particularly for dishes like biryani and pilaf?",
+        "answers": ["Brown Rice", "Jasmine Rice", "Basmati Rice"],
+        "correctAnswerIdx": "2",
         "isDragQ": False
     },
     "3": {
         "id": "3",
-        "question": "Varieties Q3",
-        "answers": ["A DragMe1", "A DragMe2"],
-        "correctAnswerIdx": ["1", "0"],
+        "question": "Match the rice variety with its country of origin.",
+        "slots": ["United States", "Thailand", "India"],
+        "answers": ["Brown Rice", "Jasmine Rice", "Basmati Rice"],
+        "correctAnswerIdx": ["0", "1", "2"],
         "isDragQ": True
     },
     "4": {
         "id": "4",
-        "question": "Varieties Q4",
-        "answers": ["A1", "A2"],
+        "question": "Which type of rice has the highest fiber content and more vitamins and minerals?",
+        "answers": ["Brown Rice", "Jasmine Rice", "Basmati Rice"],
         "correctAnswerIdx": "0",
         "isDragQ": False
     },
     "5": {
         "id": "5",
-        "question": "Varieties Q5",
-        "answers": ["A1", "A2"],
-        "correctAnswerIdx": "0",
+        "question": "What type of rice is commonly used in Asian cuisines such as Thai and Vietnamese?",
+        "answers": ["Brown Rice", "Jasmine Rice", "Basmati Rice"],
+        "correctAnswerIdx": "1",
         "isDragQ": False
     }
 }
@@ -317,37 +318,38 @@ quizData_Varieties = {
 quizData_Cooking = {
     "1": {
         "id": "1",
-        "question": "Cooking Q1",
-        "answers": ["B1", "B2"],
+        "question": "How can you adjust the cooking method when preparing congee without a rice cooker?",
+        "answers": ["Increase the water-to-rice ratio and cook for a longer duration", "Decrease the water-to-rice ratio and cook for a shorter duration"],
         "correctAnswerIdx": "0",
         "isDragQ": False
     },
     "2": {
         "id": "2",
-        "question": "Cooking Q2",
-        "answers": ["B1", "B2"],
+        "question": "How can you achieve crispy rice without using a rice cooker?",
+        "answers": ["Cook rice as usual, then pan-fry or bake it until crispy", "Use a higher heat setting on the rice cooker and let the rice cook longer", "Add cornstarch to the rice before cooking to create a crispy texture"],
         "correctAnswerIdx": "0",
         "isDragQ": False
     },
     "3": {
         "id": "3",
-        "question": "Cooking Q3",
-        "answers": ["B1", "B2"],
+        "question": "How does a rice cooker adjust its cooking process to ensure perfectly cooked rice?",
+        "answers": ["By monitoring temperature fluctuations and adjusting heat levels accordingly", "By using a preset timer for each type of rice", "By adding additional water automatically if the rice is too dry"],
         "correctAnswerIdx": "0",
         "isDragQ": False
     },
     "4": {
         "id": "4",
-        "question": "Cooking Q4",
-        "answers": ["B DragMe1", "B DragMe2", "B DragMe3"],
-        "correctAnswerIdx": ["1", "0", "2"],
+        "question": "Match the rice cooking adjustment with its purpose.",
+        "slots": ["Corrects undercooked rice by providing additional moisture for proper cooking.", "Helps to soften rice grains and reduce cooking time.", "Allows excess moisture to evaporate and rice grains to firm up."],
+        "answers": ["Adding more water", "Soaking the rice", "Resting cooked rice"],
+        "correctAnswerIdx": ["0", "1", "2"],
         "isDragQ": True
     },
     "5": {
         "id": "5",
-        "question": "Cooking Q5",
-        "answers": ["B1", "B2"],
-        "correctAnswerIdx": "0",
+        "question": "What type of rice is commonly used to make crispy rice dishes?",
+        "answers": ["Brown", "Jasmine", "It doesn't matter, any rice will work"],
+        "correctAnswerIdx": "2",
         "isDragQ": False
     }
 }

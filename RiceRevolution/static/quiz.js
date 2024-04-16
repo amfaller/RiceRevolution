@@ -41,6 +41,18 @@ function renderQuestion() {
             document.getElementById("mainCol").appendChild(draggableDiv);
         }
 
+        // Create a div for each droppable element
+        for (let i = 0; i < questionData.slots.length; i++) {
+            let droppable = questionData.slots[i];
+
+            let droppableDiv = document.createElement("div");
+            droppableDiv.innerHTML = droppable;
+            droppableDiv.setAttribute("ondrop", "drop(event)");
+            droppableDiv.setAttribute("ondragover", "allowDrop(event)");
+
+            document.getElementById("mainCol").appendChild(droppableDiv);
+        }
+
         // Add a submit button
         let submitButton = document.createElement("button");
         submitButton.innerHTML = "Submit";
