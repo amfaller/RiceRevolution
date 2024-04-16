@@ -18,6 +18,24 @@ function renderQuizHome() {
     }
 }
 
+function allowDrop(event) {
+    console.log("Dropping");
+    event.preventDefault();
+    eventDefault();
+}
+
+function drag(event) {
+    console.log("Dragging");
+    event.dataTransfer.setData("text", event.target.id);
+}
+
+function drop(event) {
+    console.log("Dropped");
+    event.preventDefault();
+    var data = event.dataTransfer.getData("text");
+    event.target.appendChild(document.getElementById(data));
+}
+
 function renderQuestion() {
     // Render global margins
     functions.renderMargins();
@@ -29,28 +47,101 @@ function renderQuestion() {
 
     // If the question is draggable:
     if (questionData.isDragQ) {
-        // Create a div for each draggable element
+
         for (let i = 0; i < questionData.answers.length; i++) {
-            let draggable = questionData.answers[i];
+            // Create a bootstrap row
+            let row = document.createElement("div");
+            row.classList.add("row");
+            row.setAttribute("id", "row-" + i);
+            document.getElementById("mainCol").appendChild(row);
 
-            let draggableDiv = document.createElement("div");
-            draggableDiv.innerHTML = draggable;
-            draggableDiv.setAttribute("draggable", "true");
-            draggableDiv.setAttribute("ondragstart", "drag(event)");
+            // Create a col-2 to hold each draggable element
+            let col1 = document.createElement("div");
+            col1.classList.add("col-2");
+            row.appendChild(col1);
 
-            document.getElementById("mainCol").appendChild(draggableDiv);
-        }
+            // Create a col-8 to hold each droppable element
+            let col2 = document.createElement("div");
+            col2.classList.add("col-8");
+            row.appendChild(col2);
 
-        // Create a div for each droppable element
-        for (let i = 0; i < questionData.slots.length; i++) {
-            let droppable = questionData.slots[i];
+            // Note: The remaining col-2 is left empty; it will hold
+            // the dragged answers.
 
-            let droppableDiv = document.createElement("div");
-            droppableDiv.innerHTML = droppable;
-            droppableDiv.setAttribute("ondrop", "drop(event)");
-            droppableDiv.setAttribute("ondragover", "allowDrop(event)");
+            // Create a div for each draggable element
+            {
+                let draggable = questionData.answers[i];
 
-            document.getElementById("mainCol").appendChild(droppableDiv);
+                let draggableDiv = document.createElement("div");
+                draggableDiv.innerHTML = draggable;
+                draggableDiv.setAttribute("id", "draggable-" + i);
+                draggableDiv.classList.add("draggable");
+                draggableDiv.classList.add("ui-widget-content");
+
+                let drgDivHandle = $(draggableDiv);
+                drgDivHandle.draggable({
+                    revert: "invalid",
+                    cursor: "move"
+                });
+
+                // Change the color of the row when hovered over
+                $(draggableDiv)
+                    .mouseover(function() {
+                        $(this).css("background-color", "lightyellow"); 
+                    })
+                    .mouseout(function() {
+                        $(this).css("background-color", "");
+                    });
+
+                col1.appendChild(draggableDiv);
+            }
+
+            // Create a div for each droppable element
+            {
+                let droppable = questionData.slots[i];
+
+                let droppableDiv = document.createElement("div");
+                droppableDiv.innerHTML = droppable;
+                droppableDiv.setAttribute("id", "droppable-" + i);
+                droppableDiv.classList.add("ui-widget-content");
+
+                let drpDivHandle = $(droppableDiv);
+                drpDivHandle.droppable({
+                    accept: ".draggable",
+                    drop: function(event, ui) {
+                        console.log("Dropped");
+
+                        // Get the ID of the draggable element
+                        let draggableId = ui.draggable.attr("id");
+                        
+                        // Get the ID of the droppable element
+                        let droppableId = $(this).attr("id");
+
+                        // Get the row-i row element
+                        let rowId = droppableId.split("-")[1];
+                        let row = document.getElementById("row-" + rowId);
+
+                        // Create a col-2
+                        let col1 = document.createElement("div");
+                        col1.classList.add("col-2");
+
+                        // Get the text of the draggable element and append it to the col-2
+                        let draggableText = ui.draggable.text();
+                        col1.innerHTML = draggableText;
+
+                        // Remove the draggable element from the row
+                        ui.draggable.remove();
+
+                        // Append the col-2 to the row
+                        row.appendChild(col1);
+                    }
+                });
+
+                col2.appendChild(droppableDiv);
+            }
+
+            // Append row
+            document.getElementById("mainCol").appendChild(row);
         }
 
         // Add a submit button
