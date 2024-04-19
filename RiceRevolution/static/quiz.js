@@ -232,6 +232,8 @@ function displaySelectionButtons() {
     let mainCol = document.getElementById("mainCol");
     mainCol.innerHTML = "";
 
+    renderHeader();
+
     // Varieties Quiz
     {
         const varietiesQuizRow = document.createElement('div');
@@ -321,6 +323,54 @@ function displaySelectionButtons() {
 
         mainCol.appendChild(cookingQuizRow);
     }
+    functions.renderSpacingDiv();
+}
+
+function renderHeader() {
+    // Primary header
+    {
+        // Create a row to hold the primary header
+        let row = document.createElement("div");
+        row.setAttribute("class", "row");
+
+        // Create a column with centered text
+        let col = document.createElement("div");
+        col.setAttribute("class", "col text-center");
+
+        // Create the header
+        let header = document.createElement("h1");
+        header.innerHTML = "Quizzes";
+
+        // Append
+        col.appendChild(header);
+        row.appendChild(col);
+        document.getElementById("mainCol").appendChild(row);
+    }
+
+    // Secondary header
+    {
+        // Create a row to hold the secondary header
+        let row = document.createElement("div");
+        row.setAttribute("class", "row");
+
+        // Create a column with centered text
+        let col = document.createElement("div");
+        col.setAttribute("class", "col text-center");
+
+        // Create the subheader
+        let subHeader = document.createElement("h4");
+        subHeader.innerHTML = "Select a quiz to begin.";
+
+        // Append
+        col.appendChild(subHeader);
+        row.appendChild(col);
+        document.getElementById("mainCol").appendChild(row);
+    
+    }
+
+    // Create an empty div to pad the space
+    functions.renderSpacingDiv();
+
 }
 
 function postQuizSelection(value) {

@@ -326,3 +326,11 @@ export function displayButtons(route) {
         }
     }
 }
+
+// Helper function to render a pre-sized top/bottom margin div
+export function renderSpacingDiv(){
+    let row = document.createElement("div");
+    row.setAttribute("class", "row");
+    row.setAttribute("class", "quizPadding")
+    document.getElementById("mainCol").appendChild(row);
+}
