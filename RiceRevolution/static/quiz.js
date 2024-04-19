@@ -29,21 +29,25 @@ function renderQuestion() {
     // Render global margins
     functions.renderMargins();
 
-    let topHeader = document.createElement("h1");
-    let topHeaderText = "";
-    if (quizType == 0) {
-        topHeaderText = "Varieties Quiz";
+    {
+        let topHeader = document.createElement("h1");
+        let topHeaderText = "";
+        if (quizType == 0) {
+            topHeaderText = "Varieties Quiz";
+        }
+        else {
+            topHeaderText = "Cooking Quiz";
+        }
+        topHeader.innerHTML = topHeaderText;
+        document.getElementById("mainCol").appendChild(topHeader);
     }
-    else {
-        topHeaderText = "Cooking Quiz";
-    }
-    topHeader.innerHTML = topHeaderText;
-    document.getElementById("mainCol").appendChild(topHeader);
 
     // Render question header
-    let header = document.createElement("h1");
-    header.innerHTML = questionData.question;
-    document.getElementById("mainCol").appendChild(header);
+    {
+        let header = document.createElement("h1");
+        header.innerHTML = questionData.question;
+        document.getElementById("mainCol").appendChild(header);
+    }
 
     // If the question is draggable:
     if (questionData.isDragQ) {
@@ -146,22 +150,49 @@ function renderQuestion() {
             // Append row
             document.getElementById("mainCol").appendChild(row);
         }
-        
-        // Add a reset button 
-        let resetButton = document.createElement("button");
-        resetButton.innerHTML = "Reset";
-        resetButton.onclick = function() {
-            location.reload();
-        }
-        document.getElementById("mainCol").appendChild(resetButton);
 
-        // Add a submit button
-        let submitButton = document.createElement("button");
-        submitButton.innerHTML = "Submit";
-        submitButton.onclick = function() {
-            postDraggableAnswer();
+        functions.renderSpacingDiv();
+        
+        let buttonRow = document.createElement("div");
+        buttonRow.classList.add("row");
+        document.getElementById("mainCol").appendChild(buttonRow);
+
+        {
+            // Add a reset button 
+            let resetCol = document.createElement("div");
+            resetCol.classList.add("col-6");
+
+            let resetButton = document.createElement("button");
+            resetButton.innerHTML = "Reset";
+            resetButton.onclick = function() {
+                location.reload();
+            }
+
+            // Right-align the button
+            resetButton.classList.add('btn');
+            resetButton.classList.add('btn-primary');
+            resetButton.style.float = "right";
+
+            
+            resetCol.appendChild(resetButton);
+            buttonRow.appendChild(resetCol);
+
+            // Add a submit button
+            let submitCol = document.createElement("div");
+            submitCol.classList.add("col-6");
+
+            let submitButton = document.createElement("button");
+            submitButton.innerHTML = "Submit";
+            submitButton.onclick = function() {
+                postDraggableAnswer();
+            }
+            submitButton.classList.add('btn');
+            submitButton.classList.add('btn-primary');
+            
+            submitCol.appendChild(submitButton);
+            buttonRow.appendChild(submitCol);
         }
-        document.getElementById("mainCol").appendChild(submitButton);
+        functions.renderSpacingDiv();
     }
     else {
         // Render answer choices
