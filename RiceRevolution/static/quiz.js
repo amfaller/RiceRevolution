@@ -23,7 +23,7 @@ function renderQuizHome() {
     }
 }
 
-let dragDataArray = [];
+let dragDataArray = [-1, -1, -1, -1, -1];
 
 function renderQuestion() {
     // Render global margins
@@ -161,7 +161,10 @@ function renderQuestion() {
                         row.appendChild(col1);
 
                         // Add the id (i.e. index) of the draggable element to the dragDataArray
-                        dragDataArray.push(draggableId.split("-")[1]);
+                        // at the index specified by droppableId
+                        if (dragDataArray.length > rowId) {
+                            dragDataArray[rowId] = draggableId.split("-")[1];
+                        }
                     }
                 });
 
@@ -234,7 +237,7 @@ function renderQuestion() {
 function postDraggableAnswer() {
     // Check that the dragDataArray is equal to questionData.correctAnswerIdx
     let correct = true;
-    for (let i = 0; i < dragDataArray.length; i++) {
+    for (let i = 0; i < questionData.correctAnswerIdx.length; i++) {
         if (parseInt(dragDataArray[i]) != questionData.correctAnswerIdx[i]) {
             correct = false;
             break;
