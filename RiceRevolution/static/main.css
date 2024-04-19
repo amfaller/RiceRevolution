@@ -21,3 +21,12 @@
 }
 
 /* END COLOR THEMES */
+
+.varietyImage{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    /* Scale down the image */
+    max-width: 65%;
+}

@@ -59,6 +59,8 @@ function renderImageAndText() {
         let image = document.createElement("img");
         image.src = varietyData.url;
 
+        image.setAttribute("class", "varietyImage");
+
         // Append the image
         col.appendChild(image);
         row.appendChild(col);
