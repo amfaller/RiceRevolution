@@ -311,6 +311,9 @@ function makeDroppable(element) {
 
 // Helper function to display the back and next buttons
 export function displayButtons(route) {
+    let row = document.createElement("div");
+    row.setAttribute("class", "row");
+
     nextRoute = route;
     if (numActionsNeededForNextStep == 0) {
         lessonStepConditionsMet = true;
@@ -329,17 +332,28 @@ export function displayButtons(route) {
 
     // If we're not on the home page, display a back button
     if (currentStep != 0) {
+        let col = document.createElement("div");
+        col.setAttribute("class", "col-6 text-center");
+
         let backButton = document.createElement("button");
         backButton.innerHTML = "Back";
         backButton.id = "backButton";
         backButton.onclick = function() {
             window.location.href = route + previousStep;
         };
-        document.getElementById("mainCol").appendChild(backButton);
+
+        // Left-align
+        backButton.style.float = "left";
+        
+        col.appendChild(backButton);
+        row.appendChild(col);
     }
 
     // Only display the next buttons if the user has completed the action on the current step
     if (lessonStepConditionsMet) {
+        let col = document.createElement("div");
+        col.setAttribute("class", "col-6 text-center");
+
         // If we're not on the last page, display a next button
         if (currentStep != stepLength - 1) {
             let nextButton = document.createElement("button");
@@ -347,7 +361,11 @@ export function displayButtons(route) {
             nextButton.onclick = function() {
                 window.location.href = route + nextStep;
             };
-            document.getElementById("mainCol").appendChild(nextButton);
+
+            // Right-align
+            nextButton.style.float = "right";
+
+            col.appendChild(nextButton);
         }
 
         // If we're on the last page, display a "Quiz me" button
@@ -357,9 +375,19 @@ export function displayButtons(route) {
             quizButton.onclick = function() {
                 window.location.href = `/quiz`;
             };
-            document.getElementById("mainCol").appendChild(quizButton);
+
+            // Right-align
+            quizButton.style.float = "right";
+
+            col.appendChild(quizButton);
         }
+
+
+
+        row.appendChild(col);
     }
+
+    document.getElementById("mainCol").appendChild(row);
 }
 
 // Helper function to render a pre-sized top/bottom margin div
