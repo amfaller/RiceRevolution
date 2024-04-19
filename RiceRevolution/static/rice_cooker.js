@@ -40,6 +40,9 @@ function renderPage() {
         if (isDraggable) {
             numActionsNeededForNextStep++;
         }
+        else if (isClickable) {
+            numActionsNeededForNextStep++;
+        }
 
         switch (image) {
             case rc_images.RiceCookerImage_closed:
