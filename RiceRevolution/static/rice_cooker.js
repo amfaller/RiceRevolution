@@ -29,30 +29,42 @@ function renderRcHome() {
 // Function to render an entire page of the rice cooker guide
 function renderPage() {
     functions.renderHeaders("Cooking Rice with a Rice Cooker");
+    let numActionsNeededForNextStep = 0;
     
     for (let i = 0; i < stepData.images.length; i++) {
         let image = stepData.images[i];
+        let isClickable = stepData.clickable[i];
+        let isDraggable = stepData.draggable[i];
+        let isDroppable = stepData.droppable[i];
+
+        if (isDraggable) {
+            numActionsNeededForNextStep++;
+        }
+        else if (isClickable) {
+            numActionsNeededForNextStep++;
+        }
 
         switch (image) {
             case rc_images.RiceCookerImage_closed:
-                functions.displayRiceCookerImage(false);
+                functions.displayRiceCookerImage(false, isClickable, isDraggable, isDroppable);
                 break;
             case rc_images.RiceCookerImage_open:
-                functions.displayRiceCookerImage(true);
+                functions.displayRiceCookerImage(true, isClickable, isDraggable, isDroppable);
                 break;
             case rc_images.WaterImage:
-                functions.displayWater();
+                functions.displayWater(isClickable, isDraggable, isDroppable);
                 break;
             case rc_images.RawRice:
-                functions.displayRawRice();
+                functions.displayRawRice(isClickable, isDraggable, isDroppable);
                 break;
             case rc_images.LadleWithHand:
-                functions.displayLadleWithHand();
+                functions.displayLadleWithHand(isClickable, isDraggable, isDroppable);
                 break;
             default:
                 console.error("Invalid image type: " + image);
         }
     }
+    functions.setNumActionsNeededForNextStep(numActionsNeededForNextStep);
 
     // Render back and next buttons
     functions.displayButtons("/rice_cooker/");
