@@ -65,12 +65,21 @@ function renderPage() {
 
     functions.renderHeaders(headerText);
     let numActionsNeededForNextStep = 0;
+
+    let row = document.createElement("div");
+    row.setAttribute("class", "row");
+
+    // Get the divisor for how many columns to create
+    let divisor = stepData.images.length;
+    let numCols = 12 / divisor;
     
     for (let i = 0; i < stepData.images.length; i++) {
         let image = stepData.images[i];
         let isClickable = stepData.clickable[i];
         let isDraggable = stepData.draggable[i];
         let isDroppable = stepData.droppable[i];
+
+        let handle = null;
 
         if (isDraggable) {
             numActionsNeededForNextStep++;
@@ -82,41 +91,62 @@ function renderPage() {
         switch (image) {
             case nrc_images.OpenPot:
                 functions.displayPots(true, isClickable, isDraggable, isDroppable);
+                handle = document.getElementById("OpenPot");
                 break;
             case nrc_images.ClosedPot:
                 functions.displayPots(false, isClickable, isDraggable, isDroppable);
+                handle = document.getElementById("ClosedPot");
                 break;
             case nrc_images.WaterImage:
                 functions.displayWater(isClickable, isDraggable, isDroppable);
+                handle = document.getElementById("WaterImage");
                 break;
             case nrc_images.RawRice:
                 functions.displayRawRice(isClickable, isDraggable, isDroppable);
+                handle = document.getElementById("RawRice");
                 break;
             case nrc_images.Stove:
                 functions.displayStove(isClickable, isDraggable, isDroppable);
+                handle = document.getElementById("Stove");
                 break;
             case nrc_images.LadleWithHand:
                 functions.displayLadleWithHand(isClickable, isDraggable, isDroppable);
+                handle = document.getElementById("LadleWithHand");
                 break;
             case nrc_images.BakingSheet:
                 functions.displayBakingSheet(isClickable, isDraggable, isDroppable);
+                handle = document.getElementById("BakingSheet");
                 break;
             case nrc_images.FryingPan:
                 functions.displayFryingPan(isClickable, isDraggable, isDroppable);
+                handle = document.getElementById("FryingPan");
                 break;
             case nrc_images.Oven:
                 functions.displayOven(isClickable, isDraggable, isDroppable);
+                handle = document.getElementById("Oven");
                 break;
             case nrc_images.CrispyRice:
                 functions.displayCrispyRice(isClickable, isDraggable, isDroppable);
+                handle = document.getElementById("CrispyRice");
                 break;
             default:
                 console.error("Invalid image type: " + image);
         }
 
+        if (handle != null) {
+            handle.setAttribute("class", "nrcImage");
+        }
 
-    functions.setNumActionsNeededForNextStep(numActionsNeededForNextStep);
+        let col = document.createElement("div");
+        col.setAttribute("class", "col-" + numCols + " text-center");
+
+        col.appendChild(handle);
+        row.appendChild(col);
     }
+    functions.setNumActionsNeededForNextStep(numActionsNeededForNextStep);
+
+    let mainColHandle = document.getElementById("mainCol");
+    mainColHandle.appendChild(row);
 
     // Render back and next buttons
     functions.displayButtons("/no_rice_cooker/");
