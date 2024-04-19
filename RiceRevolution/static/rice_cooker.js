@@ -32,19 +32,22 @@ function renderPage() {
     
     for (let i = 0; i < stepData.images.length; i++) {
         let image = stepData.images[i];
+        let isClickable = stepData.clickable[i];
+        let isDraggable = stepData.draggable[i];
+        let isDroppable = stepData.droppable[i];
 
         switch (image) {
             case rc_images.RiceCookerImage_closed:
                 functions.displayRiceCookerImage(false);
                 break;
             case rc_images.RiceCookerImage_open:
-                functions.displayRiceCookerImage(true);
+                functions.displayRiceCookerImage(true, true, false, true);
                 break;
             case rc_images.WaterImage:
-                functions.displayWater();
+                functions.displayWater(isClickable, isDraggable, isDroppable);
                 break;
             case rc_images.RawRice:
-                functions.displayRawRice();
+                functions.displayRawRice(isClickable, isDraggable, isDroppable);
                 break;
             case rc_images.LadleWithHand:
                 functions.displayLadleWithHand();

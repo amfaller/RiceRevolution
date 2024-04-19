@@ -1,3 +1,8 @@
+// Global lesson flag to indicate if the user has completed all necessary 
+// actions on a particular step in order to move on to the next step
+let lessonStepConditionsMet = false;
+let nextRoute = "";
+
 export function logData() {
     // Publish via AJAX the current timestamp to the server
     $.ajax({
@@ -40,7 +45,7 @@ export function renderHeaders(mainHeaderText) {
 }   
 
 // Helper function to display the rice cooker image
-export function displayRiceCookerImage(openLid = false) {
+export function displayRiceCookerImage(openLid = false, isClickable = false, isDraggable = false, isDroppable = false) {
     let image = document.createElement("img");
 
     let imgData = openLid ? imageData["RiceCookerImage_open"] : imageData["RiceCookerImage_closed"];
@@ -49,11 +54,15 @@ export function displayRiceCookerImage(openLid = false) {
     image.alt = imgData.altText;
     image.id = imgData.id
 
+    if (isDroppable) {
+        makeDroppable(image);
+    }
+
     document.getElementById("mainCol").appendChild(image);
 }
 
 // Helper function to display the pots
-export function displayPots(openLid = false) {
+export function displayPots(openLid = false, isClickable = false, isDraggable = false, isDroppable = false) {
     let imgData = openLid ? imageData["OpenPot"] : imageData["ClosedPot"];
 
     let pots = document.createElement("img");
@@ -66,7 +75,7 @@ export function displayPots(openLid = false) {
 }
 
 // Helper function to display the water image
-export function displayWater() {
+export function displayWater(isClickable = false, isDraggable = false, isDroppable = false) {
     let imgData = imageData["WaterImage"];
 
     let water = document.createElement("img");
@@ -75,11 +84,15 @@ export function displayWater() {
     water.alt = imgData.altText;
     water.id = imgData.id
 
+    if (isDraggable) {
+        makeDraggable(water);
+    }
+
     document.getElementById("mainCol").appendChild(water);
 }
 
 // Helper function to display the raw rice image
-export function displayRawRice() {
+export function displayRawRice(isClickable = false, isDraggable = false, isDroppable = false) {
     let imgData = imageData["RawRice"];
 
     let rice = document.createElement("img");
@@ -88,11 +101,15 @@ export function displayRawRice() {
     rice.alt = imgData.altText;
     rice.id = imgData.id
 
+    if (isDraggable) {
+        makeDraggable(rice);
+    }
+
     document.getElementById("mainCol").appendChild(rice);
 }
 
 // Helper function to display the stovetop
-export function displayStove() {
+export function displayStove(isClickable = false, isDraggable = false, isDroppable = false) {
     let imgData = imageData["Stove"];
 
     let stovetop = document.createElement("img");
@@ -105,7 +122,7 @@ export function displayStove() {
 }
 
 // Helper function to display the ladle with hand
-export function displayLadleWithHand() {
+export function displayLadleWithHand(isClickable = false, isDraggable = false, isDroppable = false) {
     let imgData = imageData["LadleWithHand"];
 
     let ladle = document.createElement("img");
@@ -118,7 +135,7 @@ export function displayLadleWithHand() {
 }
 
 // Helper function to display BakingSheet
-export function displayBakingSheet() {
+export function displayBakingSheet(isClickable = false, isDraggable = false, isDroppable = false) {
     let imgData = imageData["BakingSheet"];
 
     let sheet = document.createElement("img");
@@ -131,7 +148,7 @@ export function displayBakingSheet() {
 }
 
 // Helper function to display FryingPan
-export function displayFryingPan() {
+export function displayFryingPan(isClickable = false, isDraggable = false, isDroppable = false) {
     let imgData = imageData["FryingPan"];
 
     let pan = document.createElement("img");
@@ -144,7 +161,7 @@ export function displayFryingPan() {
 }
 
 // Helper function to display the Oven
-export function displayOven() {
+export function displayOven(isClickable = false, isDraggable = false, isDroppable = false) {
     let imgData = imageData["Oven"];
 
     let oven = document.createElement("img");
@@ -157,7 +174,7 @@ export function displayOven() {
 }
 
 // Helper function to display the CrispyRice
-export function displayCrispyRice() {
+export function displayCrispyRice(isClickable = false, isDraggable = false, isDroppable = false) {
     let imgData = imageData["CrispyRice"];
 
     let crispy = document.createElement("img");
@@ -169,8 +186,49 @@ export function displayCrispyRice() {
     document.getElementById("mainCol").appendChild(crispy);
 }
 
+// Internal helper function to make something clickable
+function makeClickable(element) {
+    element.style.cursor = "pointer";
+    element.onclick = function() {
+        console.log("Clicked " + element.id);
+    };
+
+}
+
+// Internal helper function to make something draggable
+function makeDraggable(element) {
+    element.draggable = true;
+
+    element.ondragstart = function(event) {
+        console.log("Dragging " + event.target.id);
+        event.dataTransfer.setData("text", event.target.id);
+    };
+}
+
+// Internal helper function to make something droppable
+function makeDroppable(element) {
+    element.ondragover = function(event) {
+        event.preventDefault();
+        console.log("Dragged over " + event.target.id);
+    };
+
+    element.ondrop = function(event) {
+        event.preventDefault();
+        console.log("Dropped " + event.dataTransfer.getData("text") + " on " + event.target.id);
+        lessonStepConditionsMet = true;
+
+        // Remove the img element which was dropped by getting its ID
+        let droppedElement = document.getElementById(event.dataTransfer.getData("text"));
+        droppedElement.remove();
+
+        // Refresh the page
+        // location.reload();
+    };
+}
+
 // Helper function to display the back and next buttons
 export function displayButtons(route) {
+    nextRoute = route;
 
     // Get the current step
     let currentStep = parseInt(stepData.step);
@@ -188,23 +246,26 @@ export function displayButtons(route) {
         document.getElementById("mainCol").appendChild(backButton);
     }
 
-    // If we're not on the last page, display a next button
-    if (currentStep != stepLength - 1) {
-        let nextButton = document.createElement("button");
-        nextButton.innerHTML = "Next";
-        nextButton.onclick = function() {
-            window.location.href = route + nextStep;
-        };
-        document.getElementById("mainCol").appendChild(nextButton);
-    }
+    // Only display the next buttons if the user has completed the action on the current step
+    if (lessonStepConditionsMet) {
+        // If we're not on the last page, display a next button
+        if (currentStep != stepLength - 1) {
+            let nextButton = document.createElement("button");
+            nextButton.innerHTML = "Next";
+            nextButton.onclick = function() {
+                window.location.href = route + nextStep;
+            };
+            document.getElementById("mainCol").appendChild(nextButton);
+        }
 
-    // If we're on the last page, display a "Quiz me" button
-    if (currentStep == stepLength - 1) {
-        let quizButton = document.createElement("button");
-        quizButton.innerHTML = "Quiz me!";
-        quizButton.onclick = function() {
-            window.location.href = `/quiz`;
-        };
-        document.getElementById("mainCol").appendChild(quizButton);
+        // If we're on the last page, display a "Quiz me" button
+        if (currentStep == stepLength - 1) {
+            let quizButton = document.createElement("button");
+            quizButton.innerHTML = "Quiz me!";
+            quizButton.onclick = function() {
+                window.location.href = `/quiz`;
+            };
+            document.getElementById("mainCol").appendChild(quizButton);
+        }
     }
 }

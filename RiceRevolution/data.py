@@ -88,35 +88,50 @@ riceCookerSteps = {
         "step": "0",
         "subheader": "You'll need your rice of choice, some water, and a rice cooker.",
         "instructions": "",
-        "images": ["RiceCookerImage_closed", "WaterImage", "RawRice"]
+        "images": ["RiceCookerImage_closed", "WaterImage", "RawRice"],
+        "clickable": [False, False, False],
+        "draggable": [False, False, False],
+        "droppable": [False, False, False]
     },
     "1": {
         "id": "1",
         "step": "1",
         "subheader": "Measure the desired amount of rice using the measuring cup provided with the rice cooker. Rinse the rice in a separate bowl until the water runs clear, then drain the rice thoroughly.",
         "instructions": "Drag the water into the rice to wash it.",
-        "images": ["RawRice", "WaterImage"]
+        "images": ["RawRice", "WaterImage"],
+        "clickable": [False, False],
+        "draggable": [False, True],
+        "droppable": [True, False]
     },
     "2": {
         "id": "2",
         "step": "2",
         "subheader": "Add the rinsed rice to the inner pot of the rice cooker. Use the measuring cup to add the appropriate amount of water based on the type of rice being cooked.",
         "instructions": "Drag and drop the rice and water into the pot.",
-        "images": ["RawRice", "WaterImage"]
+        "images": ["RawRice", "WaterImage", "RiceCookerImage_open"],
+        "clickable": [False, False, False],
+        "draggable": [True, True, False],
+        "droppable": [False, False, True]
     },
     "3": {
         "id": "3",
         "step": "3",
         "subheader": "Place the inner pot into the rice cooker and close the lid securely. Select the appropriate cooking setting based on the type of rice being cooked.",
         "instructions": "Click on the rice cooker to close it, and set the timer.",
-        "images": ["RiceCookerImage_closed"]
+        "images": ["RiceCookerImage_closed"],
+        "clickable": [True],
+        "draggable": [False],
+        "droppable": [False]
     },
     "4": {
         "id": "4",
         "step": "4",
         "subheader": "Once the rice cooker indicates that the rice is ready, allow the rice to rest for a few minutes before fluffing it with a fork. Serve the cooked rice as desired.",
         "instructions": "Click on the rice cooker to open it!",
-        "images": ["RiceCookerImage_closed", "RiceCookerImage_open"]
+        "images": ["RiceCookerImage_closed", "RiceCookerImage_open"],
+        "clickable": [True, False],
+        "draggable": [False, False],
+        "droppable": [False, False]
     }
 }
 
