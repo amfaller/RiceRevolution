@@ -1,5 +1,10 @@
 import * as functions from './functions.js';
 
+// Per server.py:
+//  - 0 = Varieties
+//  - 1 = Cooking
+let quizType = 0;
+
 $(document).ready(function() {
     functions.logData();
     renderQuizHome();
@@ -23,6 +28,17 @@ let dragDataArray = [];
 function renderQuestion() {
     // Render global margins
     functions.renderMargins();
+
+    let topHeader = document.createElement("h1");
+    let topHeaderText = "";
+    if (quizType == 0) {
+        topHeaderText = "Varieties Quiz";
+    }
+    else {
+        topHeaderText = "Cooking Quiz";
+    }
+    topHeader.innerHTML = topHeaderText;
+    document.getElementById("mainCol").appendChild(topHeader);
 
     // Render question header
     let header = document.createElement("h1");
@@ -374,6 +390,8 @@ function renderHeader() {
 }
 
 function postQuizSelection(value) {
+    quizType = value;
+
     // Publish via AJAX the current timestamp to the server
     $.ajax({
         url: "/quiz_selection",
