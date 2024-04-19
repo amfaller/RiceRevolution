@@ -168,10 +168,16 @@ function renderStyleSelection() {
         let image = document.createElement("img");
         image.src = "https://static01.nyt.com/images/2018/02/21/dining/00RICEGUIDE8/00RICEGUIDE8-square640.jpg";
         image.setAttribute("class", "nrcStyleImage");   
+        image.onclick = function() {
+            targetStyle = riceStyles[0];
+            publishStyle();
+            functions.renderMargins();
+            renderPage();
+        };
 
         // Append
-        col.appendChild(normalButton);
         col.appendChild(image);
+        col.appendChild(normalButton);
         row.appendChild(col);
     }
 
@@ -195,10 +201,16 @@ function renderStyleSelection() {
         let image = document.createElement("img");
         image.src = "https://static01.nyt.com/images/2020/05/06/dining/06pantry-blog/06pantry-blog-mediumSquareAt3X-v2.jpg";
         image.setAttribute("class", "nrcStyleImage");
+        image.onclick = function() {
+            targetStyle = riceStyles[1];
+            publishStyle();
+            functions.renderMargins();
+            renderPage();
+        };
 
         // Append
-        col.appendChild(congeeButton);
         col.appendChild(image);
+        col.appendChild(congeeButton);
         row.appendChild(col);
     }
 
@@ -222,12 +234,21 @@ function renderStyleSelection() {
         let image = document.createElement("img");
         image.src = "https://takestwoeggs.com/wp-content/uploads/2023/07/Crispy-Rice-Recipe-takestwoeggs-sq.jpg";
         image.setAttribute("class", "nrcStyleImage");
+        image.onclick = function() {
+            targetStyle = riceStyles[2];
+            publishStyle();
+            functions.renderMargins();
+            renderPage();
+        };
 
         // Append
-        col.appendChild(crispyButton);
         col.appendChild(image);
+        col.appendChild(crispyButton);
         row.appendChild(col);
     }
+
+    // Add some bottom padding to the row
+    row.style.paddingBottom = "30px";
 
     document.getElementById("mainCol").appendChild(row);
 }
