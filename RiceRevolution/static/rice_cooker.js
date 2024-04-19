@@ -46,10 +46,10 @@ function renderPage() {
 
         switch (image) {
             case rc_images.RiceCookerImage_closed:
-                functions.displayRiceCookerImage(false);
+                functions.displayRiceCookerImage(false, isClickable, isDraggable, isDroppable);
                 break;
             case rc_images.RiceCookerImage_open:
-                functions.displayRiceCookerImage(true, true, false, true);
+                functions.displayRiceCookerImage(true, isClickable, isDraggable, isDroppable);
                 break;
             case rc_images.WaterImage:
                 functions.displayWater(isClickable, isDraggable, isDroppable);
@@ -58,7 +58,7 @@ function renderPage() {
                 functions.displayRawRice(isClickable, isDraggable, isDroppable);
                 break;
             case rc_images.LadleWithHand:
-                functions.displayLadleWithHand();
+                functions.displayLadleWithHand(isClickable, isDraggable, isDroppable);
                 break;
             default:
                 console.error("Invalid image type: " + image);

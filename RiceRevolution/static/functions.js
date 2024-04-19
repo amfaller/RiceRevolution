@@ -48,7 +48,9 @@ export function renderHeaders(mainHeaderText) {
     let instructions = document.createElement("p");
     instructions.innerHTML = stepData.instructions;
     document.getElementById("mainCol").appendChild(instructions);
-}   
+} 
+
+//////////////////////////////////////////////////////////////////////////////////
 
 // Helper function to display the rice cooker image
 export function displayRiceCookerImage(openLid = false, isClickable = false, isDraggable = false, isDroppable = false) {
@@ -59,10 +61,7 @@ export function displayRiceCookerImage(openLid = false, isClickable = false, isD
     image.src = imgData.url;
     image.alt = imgData.altText;
     image.id = imgData.id
-
-    if (isDroppable) {
-        makeDroppable(image);
-    }
+    setAttributes(image, isClickable, isDraggable, isDroppable);
 
     document.getElementById("mainCol").appendChild(image);
 }
@@ -76,6 +75,7 @@ export function displayPots(openLid = false, isClickable = false, isDraggable = 
     pots.src = imgData.url;
     pots.alt = imgData.altText;
     pots.id = imgData.id
+    setAttributes(pots, isClickable, isDraggable, isDroppable);
 
     document.getElementById("mainCol").appendChild(pots);
 }
@@ -89,10 +89,7 @@ export function displayWater(isClickable = false, isDraggable = false, isDroppab
     water.src = imgData.url;
     water.alt = imgData.altText;
     water.id = imgData.id
-
-    if (isDraggable) {
-        makeDraggable(water);
-    }
+    setAttributes(water, isClickable, isDraggable, isDroppable);
 
     document.getElementById("mainCol").appendChild(water);
 }
@@ -106,10 +103,7 @@ export function displayRawRice(isClickable = false, isDraggable = false, isDropp
     rice.src = imgData.url;
     rice.alt = imgData.altText;
     rice.id = imgData.id
-
-    if (isDraggable) {
-        makeDraggable(rice);
-    }
+    setAttributes(rice, isClickable, isDraggable, isDroppable);
 
     document.getElementById("mainCol").appendChild(rice);
 }
@@ -123,6 +117,7 @@ export function displayStove(isClickable = false, isDraggable = false, isDroppab
     stovetop.src = imgData.url;
     stovetop.alt = imgData.altText;
     stovetop.id = imgData.id
+    setAttributes(stovetop, isClickable, isDraggable, isDroppable);
 
     document.getElementById("mainCol").appendChild(stovetop);
 }
@@ -136,6 +131,7 @@ export function displayLadleWithHand(isClickable = false, isDraggable = false, i
     ladle.src = imgData.url;
     ladle.alt = imgData.altText;
     ladle.id = imgData.id
+    setAttributes(ladle, isClickable, isDraggable, isDroppable);
 
     document.getElementById("mainCol").appendChild(ladle);
 }
@@ -149,6 +145,7 @@ export function displayBakingSheet(isClickable = false, isDraggable = false, isD
     sheet.src = imgData.url;
     sheet.alt = imgData.altText;
     sheet.id = imgData.id
+    setAttributes(sheet, isClickable, isDraggable, isDroppable);
 
     document.getElementById("mainCol").appendChild(sheet);
 }
@@ -162,6 +159,7 @@ export function displayFryingPan(isClickable = false, isDraggable = false, isDro
     pan.src = imgData.url;
     pan.alt = imgData.altText;
     pan.id = imgData.id
+    setAttributes(pan, isClickable, isDraggable, isDroppable);
 
     document.getElementById("mainCol").appendChild(pan);
 }
@@ -175,6 +173,7 @@ export function displayOven(isClickable = false, isDraggable = false, isDroppabl
     oven.src = imgData.url;
     oven.alt = imgData.altText;
     oven.id = imgData.id
+    setAttributes(oven, isClickable, isDraggable, isDroppable);
 
     document.getElementById("mainCol").appendChild(oven);
 }
@@ -188,8 +187,24 @@ export function displayCrispyRice(isClickable = false, isDraggable = false, isDr
     crispy.src = imgData.url;
     crispy.alt = imgData.altText;
     crispy.id = imgData.id
+    setAttributes(crispy, isClickable, isDraggable, isDroppable);
 
     document.getElementById("mainCol").appendChild(crispy);
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+
+// Internal helper function to set drop/drag/click attributes
+function setAttributes(element, isClickable, isDraggable, isDroppable) {
+    if (isClickable) {
+        makeClickable(element);
+    }
+    if (isDraggable) {
+        makeDraggable(element);
+    }
+    if (isDroppable) {
+        makeDroppable(element);
+    }
 }
 
 // Internal helper function to make something clickable
@@ -197,6 +212,12 @@ function makeClickable(element) {
     element.style.cursor = "pointer";
     element.onclick = function() {
         console.log("Clicked " + element.id);
+        numActionsTaken++;
+
+        if (numActionsTaken == numActionsNeededForNextStep) {
+            lessonStepConditionsMet = true;
+            displayButtons(nextRoute);
+        }
     };
 
 }
@@ -236,9 +257,14 @@ function makeDroppable(element) {
     };
 }
 
+//////////////////////////////////////////////////////////////////////////////////
+
 // Helper function to display the back and next buttons
 export function displayButtons(route) {
     nextRoute = route;
+    if (numActionsNeededForNextStep == 0) {
+        lessonStepConditionsMet = true;
+    }
 
     // Get the current step
     let currentStep = parseInt(stepData.step);
