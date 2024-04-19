@@ -311,6 +311,8 @@ function makeDroppable(element) {
 
 // Helper function to display the back and next buttons
 export function displayButtons(route) {
+    renderSpacingDiv();
+
     let row = document.createElement("div");
     row.setAttribute("class", "row");
 
@@ -411,6 +413,7 @@ export function displayButtons(route) {
     }
 
     document.getElementById("mainCol").appendChild(row);
+    renderSpacingDiv();
 }
 
 // Helper function to render a pre-sized top/bottom margin div
