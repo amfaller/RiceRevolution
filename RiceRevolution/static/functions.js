@@ -258,10 +258,17 @@ function makeClickable(element) {
         }
 
         // If this ID is "RiceCookerImage_Closed", replace it with "RiceCookerImage_Open"
-        if (clickedElement.id == "RiceCookerImage_closed") {
+        else if (clickedElement.id == "RiceCookerImage_closed") {
             clickedElement.src = imageData["RiceCookerImage_open"].url;
             clickedElement.id = imageData["RiceCookerImage_open"].id;
             clickedElement.alt = imageData["RiceCookerImage_open"].altText;
+        }
+
+        // If this ID is "RiceCookerImage_Open", replace it with "RiceCookerImage_Closed"
+        else if (clickedElement.id == "RiceCookerImage_open") {
+            clickedElement.src = imageData["RiceCookerImage_closed"].url;
+            clickedElement.id = imageData["RiceCookerImage_closed"].id;
+            clickedElement.alt = imageData["RiceCookerImage_closed"].altText;
         }
 
         if (numActionsTaken == numActionsNeededForNextStep) {
