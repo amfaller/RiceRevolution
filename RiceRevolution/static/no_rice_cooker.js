@@ -124,40 +124,112 @@ function renderPage() {
 
 // Function to render the rice style selection page
 function renderStyleSelection() {
-    let header = document.createElement("h2");
-    header.innerText = "Select a Rice Style";
-    document.getElementById("mainCol").appendChild(header);
 
-    let normalButton = document.createElement("button");
-    normalButton.innerText = "Normal";
-    normalButton.onclick = function() {
-        targetStyle = riceStyles[0];
-        publishStyle();
-        functions.renderMargins();
-        renderPage();
-    };
+    // Header
+    {
+        // Create a bootstrap row with centered text
+        let row = document.createElement("div");
+        row.setAttribute("class", "row");
 
-    let congeeButton = document.createElement("button");
-    congeeButton.innerText = "Congee";
-    congeeButton.onclick = function() {
-        targetStyle = riceStyles[1];
-        publishStyle();
-        functions.renderMargins();
-        renderPage();
-    };
+        let col = document.createElement("div");
+        col.setAttribute("class", "col text-center");
 
-    let crispyButton = document.createElement("button");
-    crispyButton.innerText = "Crispy";
-    crispyButton.onclick = function() {
-        targetStyle = riceStyles[2];
-        publishStyle();
-        functions.renderMargins();
-        renderPage();
-    };
+        // Create the header text
+        let header = document.createElement("h2");
+        header.innerText = "Select a Rice Style";
 
-    document.getElementById("mainCol").appendChild(normalButton);
-    document.getElementById("mainCol").appendChild(congeeButton);
-    document.getElementById("mainCol").appendChild(crispyButton);
+        // Append
+        col.appendChild(header);
+        row.appendChild(col);
+        document.getElementById("mainCol").appendChild(row);
+    }
+
+    // Row to hold all the rice stuff
+    let row = document.createElement("div");
+    row.setAttribute("class", "row");
+
+    // Normal rice
+    {
+        // col-4
+        let col = document.createElement("div");
+        col.setAttribute("class", "col-4 text-center");
+
+        // Button
+        let normalButton = document.createElement("button");
+        normalButton.innerText = "Normal";
+        normalButton.onclick = function() {
+            targetStyle = riceStyles[0];
+            publishStyle();
+            functions.renderMargins();
+            renderPage();
+        };
+
+        // Image
+        let image = document.createElement("img");
+        image.src = "https://static01.nyt.com/images/2018/02/21/dining/00RICEGUIDE8/00RICEGUIDE8-square640.jpg";
+        image.setAttribute("class", "nrcStyleImage");   
+
+        // Append
+        col.appendChild(normalButton);
+        col.appendChild(image);
+        row.appendChild(col);
+    }
+
+    // Congee
+    {
+        // col-4
+        let col = document.createElement("div");
+        col.setAttribute("class", "col-4 text-center");
+
+        // Button
+        let congeeButton = document.createElement("button");
+        congeeButton.innerText = "Congee";
+        congeeButton.onclick = function() {
+            targetStyle = riceStyles[1];
+            publishStyle();
+            functions.renderMargins();
+            renderPage();
+        };
+
+        // Image
+        let image = document.createElement("img");
+        image.src = "https://static01.nyt.com/images/2020/05/06/dining/06pantry-blog/06pantry-blog-mediumSquareAt3X-v2.jpg";
+        image.setAttribute("class", "nrcStyleImage");
+
+        // Append
+        col.appendChild(congeeButton);
+        col.appendChild(image);
+        row.appendChild(col);
+    }
+
+    // Crispy
+    {
+        // col-4
+        let col = document.createElement("div");
+        col.setAttribute("class", "col-4 text-center");
+
+        // Button
+        let crispyButton = document.createElement("button");
+        crispyButton.innerText = "Crispy";
+        crispyButton.onclick = function() {
+            targetStyle = riceStyles[2];
+            publishStyle();
+            functions.renderMargins();
+            renderPage();
+        };
+
+        // Image
+        let image = document.createElement("img");
+        image.src = "https://takestwoeggs.com/wp-content/uploads/2023/07/Crispy-Rice-Recipe-takestwoeggs-sq.jpg";
+        image.setAttribute("class", "nrcStyleImage");
+
+        // Append
+        col.appendChild(crispyButton);
+        col.appendChild(image);
+        row.appendChild(col);
+    }
+
+    document.getElementById("mainCol").appendChild(row);
 }
 
 // Function to publish targetStyle via ajax
