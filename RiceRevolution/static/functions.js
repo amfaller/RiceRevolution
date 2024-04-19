@@ -359,10 +359,15 @@ export function displayButtons(route) {
         let col = document.createElement("div");
         col.setAttribute("class", "col-6 text-center");
 
-        // Remove previous nextButton
+        // Remove previous nextButton and quizButton by ID if they exist
         let nextButton = document.getElementById("nextButton");
         if (nextButton) {
             nextButton.remove();
+        }
+
+        let quizButton = document.getElementById("quizButton");
+        if (quizButton) {
+            quizButton.remove();
         }
 
         // If we're not on the last page, display a next button
@@ -392,6 +397,7 @@ export function displayButtons(route) {
         if (currentStep == stepLength - 1) {
             let quizButton = document.createElement("button");
             quizButton.innerHTML = "Quiz me!";
+            quizButton.id = "quizButton";
             quizButton.onclick = function() {
                 window.location.href = `/quiz`;
             };
@@ -400,6 +406,11 @@ export function displayButtons(route) {
             quizButton.style.float = "right";
             quizButton.classList.add("btn");
             quizButton.classList.add("btn-primary");
+
+            // Disable if the user hasn't completed the necessary actions
+            if (!lessonStepConditionsMet) {
+                quizButton.disabled = true;
+            }
 
             col.appendChild(quizButton);
         }
