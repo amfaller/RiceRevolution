@@ -67,6 +67,10 @@ function renderButtons() {
         row.setAttribute("class", "row");
         row.setAttribute("id", "row" + i);
 
+        // Give it a bit of padding
+        row.style.paddingTop = "5px";
+        row.style.paddingBottom = "5px";
+
         // Create button in the row
         let button = document.createElement("button");
         button.setAttribute("class", "btn btn-primary");
