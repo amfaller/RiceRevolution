@@ -37,17 +37,50 @@ export function renderMargins() {
 
 // Helper function to render instructional page headers
 export function renderHeaders(mainHeaderText) {
-    let header = document.createElement("h1");
-    header.innerHTML = mainHeaderText;
-    document.getElementById("mainCol").appendChild(header);
+    {
+        let row = document.createElement("div");
+        row.setAttribute("class", "row");
 
-    let subheader = document.createElement("h2");
-    subheader.innerHTML = stepData.subheader;
-    document.getElementById("mainCol").appendChild(subheader);
+        let col = document.createElement("div");
+        col.setAttribute("class", "col text-center");
 
-    let instructions = document.createElement("p");
-    instructions.innerHTML = stepData.instructions;
-    document.getElementById("mainCol").appendChild(instructions);
+        let header = document.createElement("h1");
+        header.innerHTML = mainHeaderText;
+        
+        col.appendChild(header);
+        row.appendChild(col);
+        document.getElementById("mainCol").appendChild(row);
+    }
+
+    {
+        let row = document.createElement("div");
+        row.setAttribute("class", "row");
+
+        let col = document.createElement("div");
+        col.setAttribute("class", "col text-center");
+
+        let subheader = document.createElement("h4");
+        subheader.innerHTML = stepData.subheader;
+
+        col.appendChild(subheader);
+        row.appendChild(col);
+        document.getElementById("mainCol").appendChild(row);
+    }
+
+    {
+        let row = document.createElement("div");
+        row.setAttribute("class", "row");
+
+        let col = document.createElement("div");
+        col.setAttribute("class", "col text-center");
+
+        let instructions = document.createElement("p");
+        instructions.innerHTML = stepData.instructions;
+
+        col.appendChild(instructions);
+        row.appendChild(col);
+        document.getElementById("mainCol").appendChild(row);
+    }
 } 
 
 //////////////////////////////////////////////////////////////////////////////////
