@@ -229,49 +229,98 @@ function postAnswer(value) {
 }
 
 function displaySelectionButtons() {
-    // Create Bootstrap rows for buttons
-    const cookingQuizRow = document.createElement('div');
-    cookingQuizRow.classList.add('row');
-
-    const varietiesQuizRow = document.createElement('div');
-    varietiesQuizRow.classList.add('row');
-
-    {
-        // Create Varieties Quiz button
-        const varietiesQuizButton = document.createElement('button');
-        varietiesQuizButton.innerText = 'Varieties Quiz';
-        varietiesQuizButton.onclick = function () {
-            postQuizSelection(0);
-        }
-
-        // Create Cooking Quiz button
-        const cookingQuizButton = document.createElement('button');
-        cookingQuizButton.innerText = 'Cooking Quiz';
-        cookingQuizButton.onclick = function () {
-            postQuizSelection(1);
-        }
-
-        // Append buttons to rows
-        cookingQuizRow.appendChild(cookingQuizButton);
-        varietiesQuizRow.appendChild(varietiesQuizButton);
-    }
-
-    {
-        // Create scores text
-        const cooScore = document.createElement('p');
-        cooScore.innerText = "Previous score: " + cookingQuizScore + "/" +  maxCooScore;
-        cookingQuizRow.appendChild(cooScore);
-
-        const varScore = document.createElement('p');
-        varScore.innerText = "Previous score: " + varietiesQuizScore + "/" +  maxVarScore;
-        varietiesQuizRow.appendChild(varScore);
-    }
-
-    // Append rows to document
     let mainCol = document.getElementById("mainCol");
     mainCol.innerHTML = "";
-    mainCol.appendChild(cookingQuizRow);
-    mainCol.appendChild(varietiesQuizRow);
+
+    // Varieties Quiz
+    {
+        const varietiesQuizRow = document.createElement('div');
+        varietiesQuizRow.classList.add('row');
+
+        // Button
+        {
+            const varButtonCol = document.createElement('div');
+            varButtonCol.classList.add('col-6');
+
+            const varietiesQuizButton = document.createElement('button');
+            varietiesQuizButton.innerText = 'Varieties Quiz';
+            varietiesQuizButton.onclick = function () {
+                postQuizSelection(0);
+            }
+
+            // Right-align the button
+            varietiesQuizButton.classList.add('btn');
+            varietiesQuizButton.classList.add('btn-primary');
+            varietiesQuizButton.style.float = "right";
+
+            varButtonCol.appendChild(varietiesQuizButton);
+            varietiesQuizRow.appendChild(varButtonCol);
+        }
+
+        // Score
+        {
+            const varScoreCol = document.createElement('div');
+            varScoreCol.classList.add('col-6');
+
+            const varietiesScoreRow = document.createElement('div');
+            varietiesScoreRow.classList.add('row');
+
+            const varScore = document.createElement('p');
+            varScore.innerText = "Previous score: " + varietiesQuizScore + "/" +  maxVarScore;
+            varietiesScoreRow.appendChild(varScore);
+
+            varScoreCol.appendChild(varietiesScoreRow);
+
+            varietiesQuizRow.appendChild(varScoreCol);
+        }
+
+        mainCol.appendChild(varietiesQuizRow);
+    }
+
+    // Cooking Quiz
+    {
+        const cookingQuizRow = document.createElement('div');
+        cookingQuizRow.classList.add('row');
+
+        // Button
+        {
+            const cooButtonCol = document.createElement('div');
+            cooButtonCol.classList.add('col-6');
+
+            const cookingQuizButton = document.createElement('button');
+            cookingQuizButton.innerText = 'Cooking Quiz';
+            cookingQuizButton.onclick = function () {
+                postQuizSelection(1);
+            }
+
+            // Right-align the button
+            cookingQuizButton.classList.add('btn');
+            cookingQuizButton.classList.add('btn-primary');
+            cookingQuizButton.style.float = "right";
+
+            cooButtonCol.appendChild(cookingQuizButton);
+            cookingQuizRow.appendChild(cooButtonCol);
+        }
+
+        // Score
+        {
+            const cookingScoreCol = document.createElement('div');
+            cookingScoreCol.classList.add('col-6');
+
+            const cookingScoreRow = document.createElement('div');
+            cookingScoreRow.classList.add('row');
+
+            const cooScore = document.createElement('p');
+            cooScore.innerText = "Previous score: " + cookingQuizScore + "/" +  maxCooScore;
+            cookingScoreRow.appendChild(cooScore);
+
+            cookingScoreCol.appendChild(cookingScoreRow);
+
+            cookingQuizRow.appendChild(cookingScoreCol);
+        }
+
+        mainCol.appendChild(cookingQuizRow);
+    }
 }
 
 function postQuizSelection(value) {
