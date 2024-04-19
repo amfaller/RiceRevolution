@@ -1,7 +1,13 @@
 // Global lesson flag to indicate if the user has completed all necessary 
 // actions on a particular step in order to move on to the next step
 let lessonStepConditionsMet = false;
+let numActionsTaken = 0;
+let numActionsNeededForNextStep = 0;
 let nextRoute = "";
+
+export function setNumActionsNeededForNextStep(numActionsNeeded) {
+    numActionsNeededForNextStep = numActionsNeeded;
+}
 
 export function logData() {
     // Publish via AJAX the current timestamp to the server
@@ -221,8 +227,12 @@ function makeDroppable(element) {
         let droppedElement = document.getElementById(event.dataTransfer.getData("text"));
         droppedElement.remove();
 
-        // Refresh the page
-        // location.reload();
+        numActionsTaken++;
+
+        if (numActionsTaken == numActionsNeededForNextStep) {
+            lessonStepConditionsMet = true;
+            displayButtons(nextRoute);
+        }
     };
 }
 
@@ -235,11 +245,17 @@ export function displayButtons(route) {
     let nextStep = currentStep + 1;
     let previousStep = currentStep - 1;
 
+    // Remove the backButton by ID if it exists
+    let backButton = document.getElementById("backButton");
+    if (backButton) {
+        backButton.remove();
+    }
 
     // If we're not on the home page, display a back button
     if (currentStep != 0) {
         let backButton = document.createElement("button");
         backButton.innerHTML = "Back";
+        backButton.id = "backButton";
         backButton.onclick = function() {
             window.location.href = route + previousStep;
         };

@@ -29,12 +29,17 @@ function renderRcHome() {
 // Function to render an entire page of the rice cooker guide
 function renderPage() {
     functions.renderHeaders("Cooking Rice with a Rice Cooker");
+    let numActionsNeededForNextStep = 0;
     
     for (let i = 0; i < stepData.images.length; i++) {
         let image = stepData.images[i];
         let isClickable = stepData.clickable[i];
         let isDraggable = stepData.draggable[i];
         let isDroppable = stepData.droppable[i];
+
+        if (isDraggable) {
+            numActionsNeededForNextStep++;
+        }
 
         switch (image) {
             case rc_images.RiceCookerImage_closed:
@@ -56,6 +61,7 @@ function renderPage() {
                 console.error("Invalid image type: " + image);
         }
     }
+    functions.setNumActionsNeededForNextStep(numActionsNeededForNextStep);
 
     // Render back and next buttons
     functions.displayButtons("/rice_cooker/");
