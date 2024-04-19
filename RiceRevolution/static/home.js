@@ -38,7 +38,7 @@ function renderHeaders() {
     header.innerHTML = headerText;
 
     // Create the subheader
-    let subHeader = document.createElement("h3");
+    let subHeader = document.createElement("h4");
     subHeader.innerHTML = subHeaderText;
 
     // Append the header and subheader to the column

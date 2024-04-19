@@ -118,7 +118,7 @@ riceCookerSteps = {
         "step": "3",
         "subheader": "Place the inner pot into the rice cooker and close the lid securely. Select the appropriate cooking setting based on the type of rice being cooked.",
         "instructions": "Click on the rice cooker to close it fully (and set the timer).",
-        "images": ["RiceCookerImage_closed"],
+        "images": ["RiceCookerImage_open"],
         "clickable": [True],
         "draggable": [False],
         "droppable": [False]

@@ -176,6 +176,12 @@ def submit_answer():
       if data['correct']:
          cookingQuizScore += 1
 
+   if cookingQuizScore >= maxScore:
+      cookingQuizScore = maxScore
+
+   if varietiesQuizScore >= maxScore:
+      varietiesQuizScore = maxScore
+
    return jsonify(data)
 
 # Route to see logs

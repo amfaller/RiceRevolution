@@ -37,17 +37,50 @@ export function renderMargins() {
 
 // Helper function to render instructional page headers
 export function renderHeaders(mainHeaderText) {
-    let header = document.createElement("h1");
-    header.innerHTML = mainHeaderText;
-    document.getElementById("mainCol").appendChild(header);
+    {
+        let row = document.createElement("div");
+        row.setAttribute("class", "row");
 
-    let subheader = document.createElement("h2");
-    subheader.innerHTML = stepData.subheader;
-    document.getElementById("mainCol").appendChild(subheader);
+        let col = document.createElement("div");
+        col.setAttribute("class", "col text-center");
 
-    let instructions = document.createElement("p");
-    instructions.innerHTML = stepData.instructions;
-    document.getElementById("mainCol").appendChild(instructions);
+        let header = document.createElement("h1");
+        header.innerHTML = mainHeaderText;
+        
+        col.appendChild(header);
+        row.appendChild(col);
+        document.getElementById("mainCol").appendChild(row);
+    }
+
+    {
+        let row = document.createElement("div");
+        row.setAttribute("class", "row");
+
+        let col = document.createElement("div");
+        col.setAttribute("class", "col text-center");
+
+        let subheader = document.createElement("h4");
+        subheader.innerHTML = stepData.subheader;
+
+        col.appendChild(subheader);
+        row.appendChild(col);
+        document.getElementById("mainCol").appendChild(row);
+    }
+
+    {
+        let row = document.createElement("div");
+        row.setAttribute("class", "row");
+
+        let col = document.createElement("div");
+        col.setAttribute("class", "col text-center");
+
+        let instructions = document.createElement("p");
+        instructions.innerHTML = stepData.instructions;
+
+        col.appendChild(instructions);
+        row.appendChild(col);
+        document.getElementById("mainCol").appendChild(row);
+    }
 } 
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -221,12 +254,21 @@ function makeClickable(element) {
         if (clickedElement.id == "ClosedPot") {
             clickedElement.src = imageData["OpenPot"].url;
             clickedElement.id = imageData["OpenPot"].id;
+            clickedElement.alt = imageData["OpenPot"].altText;
         }
 
         // If this ID is "RiceCookerImage_Closed", replace it with "RiceCookerImage_Open"
-        if (clickedElement.id == "RiceCookerImage_Closed") {
-            clickedElement.src = imageData["RiceCookerImage_Open"].url;
-            clickedElement.id = imageData["RiceCookerImage_Open"].id;
+        else if (clickedElement.id == "RiceCookerImage_closed") {
+            clickedElement.src = imageData["RiceCookerImage_open"].url;
+            clickedElement.id = imageData["RiceCookerImage_open"].id;
+            clickedElement.alt = imageData["RiceCookerImage_open"].altText;
+        }
+
+        // If this ID is "RiceCookerImage_Open", replace it with "RiceCookerImage_Closed"
+        else if (clickedElement.id == "RiceCookerImage_open") {
+            clickedElement.src = imageData["RiceCookerImage_closed"].url;
+            clickedElement.id = imageData["RiceCookerImage_closed"].id;
+            clickedElement.alt = imageData["RiceCookerImage_closed"].altText;
         }
 
         if (numActionsTaken == numActionsNeededForNextStep) {
@@ -276,6 +318,11 @@ function makeDroppable(element) {
 
 // Helper function to display the back and next buttons
 export function displayButtons(route) {
+    renderSpacingDiv();
+
+    let row = document.createElement("div");
+    row.setAttribute("class", "row");
+
     nextRoute = route;
     if (numActionsNeededForNextStep == 0) {
         lessonStepConditionsMet = true;
@@ -294,35 +341,103 @@ export function displayButtons(route) {
 
     // If we're not on the home page, display a back button
     if (currentStep != 0) {
+        let col = document.createElement("div");
+        col.setAttribute("class", "col-6 text-center");
+
         let backButton = document.createElement("button");
         backButton.innerHTML = "Back";
         backButton.id = "backButton";
         backButton.onclick = function() {
             window.location.href = route + previousStep;
         };
-        document.getElementById("mainCol").appendChild(backButton);
-    }
 
-    // Only display the next buttons if the user has completed the action on the current step
-    if (lessonStepConditionsMet) {
+        // Left-align
+        backButton.style.float = "left";
+        backButton.classList.add("btn");
+        backButton.classList.add("btn-primary");
+        
+        col.appendChild(backButton);
+        row.appendChild(col);
+    }
+    
+    let handle = null;
+
+    {
+        let col = document.createElement("div");
+        col.setAttribute("class", "col-6 text-center");
+
+        // Remove previous nextButton and quizButton by ID if they exist
+        let nextButton = document.getElementById("nextButton");
+        if (nextButton) {
+            nextButton.remove();
+        }
+
+        let quizButton = document.getElementById("quizButton");
+        if (quizButton) {
+            quizButton.remove();
+        }
+
         // If we're not on the last page, display a next button
         if (currentStep != stepLength - 1) {
             let nextButton = document.createElement("button");
             nextButton.innerHTML = "Next";
+            nextButton.id = "nextButton";
             nextButton.onclick = function() {
                 window.location.href = route + nextStep;
             };
-            document.getElementById("mainCol").appendChild(nextButton);
+
+            // Right-align
+            nextButton.style.float = "right";
+            nextButton.classList.add("btn");
+            nextButton.classList.add("btn-primary");
+            
+            // Disable if the user hasn't completed the necessary actions
+            if (!lessonStepConditionsMet) {
+                nextButton.disabled = true;
+            }
+
+            handle = nextButton;
+            col.appendChild(nextButton);
         }
 
         // If we're on the last page, display a "Quiz me" button
         if (currentStep == stepLength - 1) {
             let quizButton = document.createElement("button");
             quizButton.innerHTML = "Quiz me!";
+            quizButton.id = "quizButton";
             quizButton.onclick = function() {
                 window.location.href = `/quiz`;
             };
-            document.getElementById("mainCol").appendChild(quizButton);
+
+            // Right-align
+            quizButton.style.float = "right";
+            quizButton.classList.add("btn");
+            quizButton.classList.add("btn-primary");
+
+            // Disable if the user hasn't completed the necessary actions
+            if (!lessonStepConditionsMet) {
+                quizButton.disabled = true;
+            }
+
+            col.appendChild(quizButton);
         }
+        
+        row.appendChild(col);
     }
+
+    // Only enable the next buttons if the user has completed the action on the current step
+    if (lessonStepConditionsMet && handle != null) {
+        handle.disabled = false;
+    }
+
+    document.getElementById("mainCol").appendChild(row);
+    renderSpacingDiv();
+}
+
+// Helper function to render a pre-sized top/bottom margin div
+export function renderSpacingDiv(){
+    let row = document.createElement("div");
+    row.setAttribute("class", "row");
+    row.setAttribute("class", "quizPadding")
+    document.getElementById("mainCol").appendChild(row);
 }

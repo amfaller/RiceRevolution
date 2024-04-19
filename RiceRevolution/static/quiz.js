@@ -1,5 +1,10 @@
 import * as functions from './functions.js';
 
+// Per server.py:
+//  - 0 = Varieties
+//  - 1 = Cooking
+let quizType = 0;
+
 $(document).ready(function() {
     functions.logData();
     renderQuizHome();
@@ -18,16 +23,52 @@ function renderQuizHome() {
     }
 }
 
-let dragDataArray = [];
+let dragDataArray = [-1, -1, -1, -1, -1];
 
 function renderQuestion() {
     // Render global margins
     functions.renderMargins();
 
+    {
+        let row = document.createElement("div");
+        row.classList.add("row");
+        let col = document.createElement("div");
+        col.classList.add("col");
+        col.classList.add("text-center");
+
+        let topHeader = document.createElement("h1");
+        let topHeaderText = "";
+        if (quizType == 0) {
+            topHeaderText = "Varieties Quiz";
+        }
+        else {
+            topHeaderText = "Cooking Quiz";
+        }
+        topHeader.innerHTML = topHeaderText;
+
+        col.appendChild(topHeader);
+        row.appendChild(col);
+        document.getElementById("mainCol").appendChild(row);
+    }
+
     // Render question header
-    let header = document.createElement("h1");
-    header.innerHTML = questionData.question;
-    document.getElementById("mainCol").appendChild(header);
+    {
+        let questionNumber = questionData.id;
+
+        let row = document.createElement("div");
+        row.classList.add("row");
+
+        let col = document.createElement("div");
+        col.classList.add("col");
+        col.classList.add("text-center");
+
+        let header = document.createElement("h3");
+        header.innerHTML = "Question " + questionNumber + ": " +  questionData.question;
+
+        col.appendChild(header);
+        row.appendChild(col);
+        document.getElementById("mainCol").appendChild(row);
+    }
 
     // If the question is draggable:
     if (questionData.isDragQ) {
@@ -120,7 +161,10 @@ function renderQuestion() {
                         row.appendChild(col1);
 
                         // Add the id (i.e. index) of the draggable element to the dragDataArray
-                        dragDataArray.push(draggableId.split("-")[1]);
+                        // at the index specified by droppableId
+                        if (dragDataArray.length > rowId) {
+                            dragDataArray[rowId] = draggableId.split("-")[1];
+                        }
                     }
                 });
 
@@ -130,26 +174,67 @@ function renderQuestion() {
             // Append row
             document.getElementById("mainCol").appendChild(row);
         }
-        
-        // Add a reset button 
-        let resetButton = document.createElement("button");
-        resetButton.innerHTML = "Reset";
-        resetButton.onclick = function() {
-            location.reload();
-        }
-        document.getElementById("mainCol").appendChild(resetButton);
 
-        // Add a submit button
-        let submitButton = document.createElement("button");
-        submitButton.innerHTML = "Submit";
-        submitButton.onclick = function() {
-            postDraggableAnswer();
+        functions.renderSpacingDiv();
+        
+        let buttonRow = document.createElement("div");
+        buttonRow.classList.add("row");
+        document.getElementById("mainCol").appendChild(buttonRow);
+
+        {
+            // Add a reset button 
+            let resetCol = document.createElement("div");
+            resetCol.classList.add("col-6");
+
+            let resetButton = document.createElement("button");
+            resetButton.innerHTML = "Reset";
+            resetButton.onclick = function() {
+                location.reload();
+            }
+
+            // Right-align the button
+            resetButton.classList.add('btn');
+            resetButton.classList.add('btn-primary');
+            resetButton.style.float = "right";
+
+            
+            resetCol.appendChild(resetButton);
+            buttonRow.appendChild(resetCol);
+
+            // Add a submit button
+            let submitCol = document.createElement("div");
+            submitCol.classList.add("col-6");
+
+            let submitButton = document.createElement("button");
+            submitButton.innerHTML = "Submit";
+            submitButton.onclick = function() {
+                postDraggableAnswer();
+            }
+            submitButton.classList.add('btn');
+            submitButton.classList.add('btn-primary');
+            
+            submitCol.appendChild(submitButton);
+            buttonRow.appendChild(submitCol);
         }
-        document.getElementById("mainCol").appendChild(submitButton);
+        functions.renderSpacingDiv();
     }
     else {
+        functions.renderSpacingDiv();
+
+        // Get the divisor for how many bootsrap columns to use
+        let divisor = questionData.answers.length;
+        let colSize = 12 / divisor;
+        
+        // Row to hold buttons
+        let row = document.createElement("div");
+        row.classList.add("row");
+
         // Render answer choices
         for (let i = 0; i < questionData.answers.length; i++) {
+            let col = document.createElement("div");
+            col.classList.add("col-" + colSize);
+            col.classList.add("text-center");
+
             let answer = questionData.answers[i];
 
             let answerButton = document.createElement("button");
@@ -158,15 +243,22 @@ function renderQuestion() {
                 postAnswer(i);
             }
 
-            document.getElementById("mainCol").appendChild(answerButton);
+            answerButton.classList.add("btn");
+            answerButton.classList.add("btn-primary");
+
+            col.appendChild(answerButton);
+            row.appendChild(col);
         }
+
+        document.getElementById("mainCol").appendChild(row);
+        functions.renderSpacingDiv();
     }
 }
 
 function postDraggableAnswer() {
     // Check that the dragDataArray is equal to questionData.correctAnswerIdx
     let correct = true;
-    for (let i = 0; i < dragDataArray.length; i++) {
+    for (let i = 0; i < questionData.correctAnswerIdx.length; i++) {
         if (parseInt(dragDataArray[i]) != questionData.correctAnswerIdx[i]) {
             correct = false;
             break;
@@ -229,52 +321,153 @@ function postAnswer(value) {
 }
 
 function displaySelectionButtons() {
-    // Create Bootstrap rows for buttons
-    const cookingQuizRow = document.createElement('div');
-    cookingQuizRow.classList.add('row');
-
-    const varietiesQuizRow = document.createElement('div');
-    varietiesQuizRow.classList.add('row');
-
-    {
-        // Create Varieties Quiz button
-        const varietiesQuizButton = document.createElement('button');
-        varietiesQuizButton.innerText = 'Varieties Quiz';
-        varietiesQuizButton.onclick = function () {
-            postQuizSelection(0);
-        }
-
-        // Create Cooking Quiz button
-        const cookingQuizButton = document.createElement('button');
-        cookingQuizButton.innerText = 'Cooking Quiz';
-        cookingQuizButton.onclick = function () {
-            postQuizSelection(1);
-        }
-
-        // Append buttons to rows
-        cookingQuizRow.appendChild(cookingQuizButton);
-        varietiesQuizRow.appendChild(varietiesQuizButton);
-    }
-
-    {
-        // Create scores text
-        const cooScore = document.createElement('p');
-        cooScore.innerText = "Previous score: " + cookingQuizScore + "/" +  maxCooScore;
-        cookingQuizRow.appendChild(cooScore);
-
-        const varScore = document.createElement('p');
-        varScore.innerText = "Previous score: " + varietiesQuizScore + "/" +  maxVarScore;
-        varietiesQuizRow.appendChild(varScore);
-    }
-
-    // Append rows to document
     let mainCol = document.getElementById("mainCol");
     mainCol.innerHTML = "";
-    mainCol.appendChild(cookingQuizRow);
-    mainCol.appendChild(varietiesQuizRow);
+
+    renderHeader();
+
+    // Varieties Quiz
+    {
+        const varietiesQuizRow = document.createElement('div');
+        varietiesQuizRow.classList.add('row');
+
+        // Button
+        {
+            const varButtonCol = document.createElement('div');
+            varButtonCol.classList.add('col-6');
+
+            const varietiesQuizButton = document.createElement('button');
+            varietiesQuizButton.innerText = 'Varieties Quiz';
+            varietiesQuizButton.onclick = function () {
+                postQuizSelection(0);
+            }
+
+            // Right-align the button
+            varietiesQuizButton.classList.add('btn');
+            varietiesQuizButton.classList.add('btn-primary');
+            varietiesQuizButton.style.float = "right";
+
+            varButtonCol.appendChild(varietiesQuizButton);
+            varietiesQuizRow.appendChild(varButtonCol);
+        }
+
+        // Score
+        {
+            const varScoreCol = document.createElement('div');
+            varScoreCol.classList.add('col-6');
+
+            const varietiesScoreRow = document.createElement('div');
+            varietiesScoreRow.classList.add('row');
+
+            const varScore = document.createElement('p');
+            varScore.innerText = "Previous score: " + varietiesQuizScore + "/" +  maxVarScore;
+            varietiesScoreRow.appendChild(varScore);
+
+            varScoreCol.appendChild(varietiesScoreRow);
+
+            varietiesQuizRow.appendChild(varScoreCol);
+        }
+
+        mainCol.appendChild(varietiesQuizRow);
+    }
+
+    // Cooking Quiz
+    {
+        const cookingQuizRow = document.createElement('div');
+        cookingQuizRow.classList.add('row');
+
+        // Button
+        {
+            const cooButtonCol = document.createElement('div');
+            cooButtonCol.classList.add('col-6');
+
+            const cookingQuizButton = document.createElement('button');
+            cookingQuizButton.innerText = 'Cooking Quiz';
+            cookingQuizButton.onclick = function () {
+                postQuizSelection(1);
+            }
+
+            // Right-align the button
+            cookingQuizButton.classList.add('btn');
+            cookingQuizButton.classList.add('btn-primary');
+            cookingQuizButton.style.float = "right";
+
+            cooButtonCol.appendChild(cookingQuizButton);
+            cookingQuizRow.appendChild(cooButtonCol);
+        }
+
+        // Score
+        {
+            const cookingScoreCol = document.createElement('div');
+            cookingScoreCol.classList.add('col-6');
+
+            const cookingScoreRow = document.createElement('div');
+            cookingScoreRow.classList.add('row');
+
+            const cooScore = document.createElement('p');
+            cooScore.innerText = "Previous score: " + cookingQuizScore + "/" +  maxCooScore;
+            cookingScoreRow.appendChild(cooScore);
+
+            cookingScoreCol.appendChild(cookingScoreRow);
+
+            cookingQuizRow.appendChild(cookingScoreCol);
+        }
+
+        mainCol.appendChild(cookingQuizRow);
+    }
+    functions.renderSpacingDiv();
+}
+
+function renderHeader() {
+    // Primary header
+    {
+        // Create a row to hold the primary header
+        let row = document.createElement("div");
+        row.setAttribute("class", "row");
+
+        // Create a column with centered text
+        let col = document.createElement("div");
+        col.setAttribute("class", "col text-center");
+
+        // Create the header
+        let header = document.createElement("h1");
+        header.innerHTML = "Quizzes";
+
+        // Append
+        col.appendChild(header);
+        row.appendChild(col);
+        document.getElementById("mainCol").appendChild(row);
+    }
+
+    // Secondary header
+    {
+        // Create a row to hold the secondary header
+        let row = document.createElement("div");
+        row.setAttribute("class", "row");
+
+        // Create a column with centered text
+        let col = document.createElement("div");
+        col.setAttribute("class", "col text-center");
+
+        // Create the subheader
+        let subHeader = document.createElement("h4");
+        subHeader.innerHTML = "Select a quiz to begin.";
+
+        // Append
+        col.appendChild(subHeader);
+        row.appendChild(col);
+        document.getElementById("mainCol").appendChild(row);
+    
+    }
+
+    // Create an empty div to pad the space
+    functions.renderSpacingDiv();
+
 }
 
 function postQuizSelection(value) {
+    quizType = value;
+
     // Publish via AJAX the current timestamp to the server
     $.ajax({
         url: "/quiz_selection",
