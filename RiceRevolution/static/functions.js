@@ -214,6 +214,21 @@ function makeClickable(element) {
         console.log("Clicked " + element.id);
         numActionsTaken++;
 
+        // Get the ID of the element that was clicked
+        let clickedElement = document.getElementById(element.id);
+
+        // If this ID is "ClosedPot", replace it with "OpenPot"
+        if (clickedElement.id == "ClosedPot") {
+            clickedElement.src = imageData["OpenPot"].url;
+            clickedElement.id = imageData["OpenPot"].id;
+        }
+
+        // If this ID is "RiceCookerImage_Closed", replace it with "RiceCookerImage_Open"
+        if (clickedElement.id == "RiceCookerImage_Closed") {
+            clickedElement.src = imageData["RiceCookerImage_Open"].url;
+            clickedElement.id = imageData["RiceCookerImage_Open"].id;
+        }
+
         if (numActionsTaken == numActionsNeededForNextStep) {
             lessonStepConditionsMet = true;
             displayButtons(nextRoute);

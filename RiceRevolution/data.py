@@ -128,10 +128,10 @@ riceCookerSteps = {
         "step": "4",
         "subheader": "Once the rice cooker indicates that the rice is ready, allow the rice to rest for a few minutes before fluffing it with a fork. Serve the cooked rice as desired.",
         "instructions": "Click on the rice cooker to open it!",
-        "images": ["RiceCookerImage_closed", "RiceCookerImage_open"],
-        "clickable": [True, False],
-        "draggable": [False, False],
-        "droppable": [False, False]
+        "images": ["RiceCookerImage_closed"],
+        "clickable": [True],
+        "draggable": [False],
+        "droppable": [False]
     }
 }
 
@@ -141,42 +141,60 @@ noRiceCookerSteps = {
         "step": "0",
         "subheader": "Make perfect rice with tools you already have. You’ll need your rice, some water, and a pot.",
         "instructions": "",
-        "images": ["RawRice", "WaterImage", "ClosedPot"]
+        "images": ["RawRice", "WaterImage", "ClosedPot"],
+        "clickable": [False, False, False],
+        "draggable": [False, False, False],
+        "droppable": [False, False, False]
     },
     "1" : {
         "id": "1",
         "step": "1",
         "subheader": "Measure the desired amount of rice using a measuring cup. Rinse the rice in a separate bowl until the water runs clear, then drain the rice thoroughly.",
         "instructions": "Drag the water into the rice to wash it.",
-        "images": ["RawRice", "WaterImage"]
+        "images": ["RawRice", "WaterImage"],
+        "clickable": [False, False],
+        "draggable": [False, True],
+        "droppable": [True, False]
     },
     "2" : {
         "id": "2",
         "step": "2",
         "subheader": "Add the rinsed rice to a pot or saucepan. Use the measuring cup to add the appropriate amount of water based on the type of rice being cooked.",
         "instructions": "Drag and drop the rice and water into the pot.",
-        "images": ["RawRice", "WaterImage", "OpenPot"]
+        "images": ["RawRice", "WaterImage", "OpenPot"],
+        "clickable": [False, False, False],
+        "draggable": [True, True, False],
+        "droppable": [False, False, True]
     },
     "3" : {
         "id": "3",
         "step": "3",
         "subheader": "Place the pot or saucepan on the stovetop over medium heat. Bring the water to a boil, stir to ensure nothing sticks, then reduce the heat to low and cover the pot with a lid.",
-        "instructions": "Drag the pot to the stove and turn on the heat. Stir the pot by dragging the ladle",
-        "images": ["OpenPot", "Stove", "ClosedPot", "LadleWithHand"]
+        "instructions": "Stir the pot by dragging the ladle, then drag the pot to the stove. ",
+        "images": ["Stove", "ClosedPot", "LadleWithHand"],
+        "clickable": [False, False, False],
+        "draggable": [False, True, True],
+        "droppable": [True, True, False]
     },
     "4" : {
         "id": "4",
         "step": "4",
         "subheader": "Allow the rice to simmer for the recommended cooking time, typically 15-20 minutes. Avoid lifting the lid while the rice is cooking to prevent steam from escaping.",
         "instructions": "Set the timer and wait for the rice to cook.",
-        "images": ["ClosedPot", "Stove"]
+        "images": ["ClosedPot", "Stove"],
+        "clickable": [False, False],
+        "draggable": [False, False],
+        "droppable": [False, False]
     },
     "5" : {
         "id": "5",
         "step": "5",
         "subheader": "Once the rice is cooked, remove the pot from the heat and let it rest for a few minutes. Fluff the rice with a fork before serving.",
         "instructions": "Click on the pot to open it!",
-        "images": ["OpenPot", "ClosedPot"]
+        "images": ["ClosedPot"],
+        "clickable": [True],
+        "draggable": [False],
+        "droppable": [False]
     }
 }
 

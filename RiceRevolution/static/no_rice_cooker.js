@@ -64,44 +64,58 @@ function renderPage() {
     headerText += " without a Rice Cooker";
 
     functions.renderHeaders(headerText);
+    let numActionsNeededForNextStep = 0;
     
     for (let i = 0; i < stepData.images.length; i++) {
         let image = stepData.images[i];
+        let isClickable = stepData.clickable[i];
+        let isDraggable = stepData.draggable[i];
+        let isDroppable = stepData.droppable[i];
+
+        if (isDraggable) {
+            numActionsNeededForNextStep++;
+        }
+        else if (isClickable) {
+            numActionsNeededForNextStep++;
+        }
 
         switch (image) {
             case nrc_images.OpenPot:
-                functions.displayPots(true);
+                functions.displayPots(true, isClickable, isDraggable, isDroppable);
                 break;
             case nrc_images.ClosedPot:
-                functions.displayPots(false);
+                functions.displayPots(false, isClickable, isDraggable, isDroppable);
                 break;
             case nrc_images.WaterImage:
-                functions.displayWater();
+                functions.displayWater(isClickable, isDraggable, isDroppable);
                 break;
             case nrc_images.RawRice:
-                functions.displayRawRice();
+                functions.displayRawRice(isClickable, isDraggable, isDroppable);
                 break;
             case nrc_images.Stove:
-                functions.displayStove();
+                functions.displayStove(isClickable, isDraggable, isDroppable);
                 break;
             case nrc_images.LadleWithHand:
-                functions.displayLadleWithHand();
+                functions.displayLadleWithHand(isClickable, isDraggable, isDroppable);
                 break;
             case nrc_images.BakingSheet:
-                functions.displayBakingSheet();
+                functions.displayBakingSheetisClickable, isDraggable, isDroppable();
                 break;
             case nrc_images.FryingPan:
-                functions.displayFryingPan();
+                functions.displayFryingPan(isClickable, isDraggable, isDroppable);
                 break;
             case nrc_images.Oven:
-                functions.displayOven();
+                functions.displayOven(isClickable, isDraggable, isDroppable);
                 break;
             case nrc_images.CrispyRice:
-                functions.displayCrispyRice();
+                functions.displayCrispyRice(isClickable, isDraggable, isDroppable);
                 break;
             default:
                 console.error("Invalid image type: " + image);
         }
+
+
+    functions.setNumActionsNeededForNextStep(numActionsNeededForNextStep);
     }
 
     // Render back and next buttons
