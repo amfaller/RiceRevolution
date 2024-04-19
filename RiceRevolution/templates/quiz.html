@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<script type="module" src="{{ url_for('static', filename = 'quiz.js') }}"></script>
+
+<script>
+    let questionData = {{ questionData | tojson }};
+    let varietiesQuizScore = {{ varietiesQuizScore | tojson }};
+    let cookingQuizScore = {{ cookingQuizScore | tojson }};
+    let maxVarScore = {{ maxVarScore | tojson }};
+    let maxCooScore = {{ maxCooScore | tojson }};
+    console.log('quiz')
+</script>
+
+<div class="container" id="main"></div>
+
+{% endblock %}
