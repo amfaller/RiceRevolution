@@ -344,27 +344,45 @@ export function displayButtons(route) {
 
         // Left-align
         backButton.style.float = "left";
+        backButton.classList.add("btn");
+        backButton.classList.add("btn-primary");
         
         col.appendChild(backButton);
         row.appendChild(col);
     }
+    
+    let handle = null;
 
-    // Only display the next buttons if the user has completed the action on the current step
-    if (lessonStepConditionsMet) {
+    {
         let col = document.createElement("div");
         col.setAttribute("class", "col-6 text-center");
+
+        // Remove previous nextButton
+        let nextButton = document.getElementById("nextButton");
+        if (nextButton) {
+            nextButton.remove();
+        }
 
         // If we're not on the last page, display a next button
         if (currentStep != stepLength - 1) {
             let nextButton = document.createElement("button");
             nextButton.innerHTML = "Next";
+            nextButton.id = "nextButton";
             nextButton.onclick = function() {
                 window.location.href = route + nextStep;
             };
 
             // Right-align
             nextButton.style.float = "right";
+            nextButton.classList.add("btn");
+            nextButton.classList.add("btn-primary");
+            
+            // Disable if the user hasn't completed the necessary actions
+            if (!lessonStepConditionsMet) {
+                nextButton.disabled = true;
+            }
 
+            handle = nextButton;
             col.appendChild(nextButton);
         }
 
@@ -378,13 +396,18 @@ export function displayButtons(route) {
 
             // Right-align
             quizButton.style.float = "right";
+            quizButton.classList.add("btn");
+            quizButton.classList.add("btn-primary");
 
             col.appendChild(quizButton);
         }
-
-
-
+        
         row.appendChild(col);
+    }
+
+    // Only enable the next buttons if the user has completed the action on the current step
+    if (lessonStepConditionsMet && handle != null) {
+        handle.disabled = false;
     }
 
     document.getElementById("mainCol").appendChild(row);
