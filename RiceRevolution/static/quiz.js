@@ -219,8 +219,22 @@ function renderQuestion() {
         functions.renderSpacingDiv();
     }
     else {
+        functions.renderSpacingDiv();
+
+        // Get the divisor for how many bootsrap columns to use
+        let divisor = questionData.answers.length;
+        let colSize = 12 / divisor;
+        
+        // Row to hold buttons
+        let row = document.createElement("div");
+        row.classList.add("row");
+
         // Render answer choices
         for (let i = 0; i < questionData.answers.length; i++) {
+            let col = document.createElement("div");
+            col.classList.add("col-" + colSize);
+            col.classList.add("text-center");
+
             let answer = questionData.answers[i];
 
             let answerButton = document.createElement("button");
@@ -229,8 +243,15 @@ function renderQuestion() {
                 postAnswer(i);
             }
 
-            document.getElementById("mainCol").appendChild(answerButton);
+            answerButton.classList.add("btn");
+            answerButton.classList.add("btn-primary");
+
+            col.appendChild(answerButton);
+            row.appendChild(col);
         }
+
+        document.getElementById("mainCol").appendChild(row);
+        functions.renderSpacingDiv();
     }
 }
 
