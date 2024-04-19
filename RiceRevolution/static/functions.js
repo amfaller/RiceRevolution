@@ -221,12 +221,14 @@ function makeClickable(element) {
         if (clickedElement.id == "ClosedPot") {
             clickedElement.src = imageData["OpenPot"].url;
             clickedElement.id = imageData["OpenPot"].id;
+            clickedElement.alt = imageData["OpenPot"].altText;
         }
 
         // If this ID is "RiceCookerImage_Closed", replace it with "RiceCookerImage_Open"
-        if (clickedElement.id == "RiceCookerImage_Closed") {
-            clickedElement.src = imageData["RiceCookerImage_Open"].url;
-            clickedElement.id = imageData["RiceCookerImage_Open"].id;
+        if (clickedElement.id == "RiceCookerImage_closed") {
+            clickedElement.src = imageData["RiceCookerImage_open"].url;
+            clickedElement.id = imageData["RiceCookerImage_open"].id;
+            clickedElement.alt = imageData["RiceCookerImage_open"].altText;
         }
 
         if (numActionsTaken == numActionsNeededForNextStep) {
