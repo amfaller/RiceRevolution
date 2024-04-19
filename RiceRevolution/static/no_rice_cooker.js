@@ -99,7 +99,7 @@ function renderPage() {
                 functions.displayLadleWithHand(isClickable, isDraggable, isDroppable);
                 break;
             case nrc_images.BakingSheet:
-                functions.displayBakingSheetisClickable, isDraggable, isDroppable();
+                functions.displayBakingSheet(isClickable, isDraggable, isDroppable);
                 break;
             case nrc_images.FryingPan:
                 functions.displayFryingPan(isClickable, isDraggable, isDroppable);
