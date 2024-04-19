@@ -30,6 +30,12 @@ function renderQuestion() {
     functions.renderMargins();
 
     {
+        let row = document.createElement("div");
+        row.classList.add("row");
+        let col = document.createElement("div");
+        col.classList.add("col");
+        col.classList.add("text-center");
+
         let topHeader = document.createElement("h1");
         let topHeaderText = "";
         if (quizType == 0) {
@@ -39,14 +45,29 @@ function renderQuestion() {
             topHeaderText = "Cooking Quiz";
         }
         topHeader.innerHTML = topHeaderText;
-        document.getElementById("mainCol").appendChild(topHeader);
+
+        col.appendChild(topHeader);
+        row.appendChild(col);
+        document.getElementById("mainCol").appendChild(row);
     }
 
     // Render question header
     {
-        let header = document.createElement("h1");
-        header.innerHTML = questionData.question;
-        document.getElementById("mainCol").appendChild(header);
+        let questionNumber = questionData.id;
+
+        let row = document.createElement("div");
+        row.classList.add("row");
+
+        let col = document.createElement("div");
+        col.classList.add("col");
+        col.classList.add("text-center");
+
+        let header = document.createElement("h3");
+        header.innerHTML = "Question " + questionNumber + ": " +  questionData.question;
+
+        col.appendChild(header);
+        row.appendChild(col);
+        document.getElementById("mainCol").appendChild(row);
     }
 
     // If the question is draggable:
