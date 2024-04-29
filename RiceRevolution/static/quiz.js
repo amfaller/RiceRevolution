@@ -106,13 +106,16 @@ function renderQuestion() {
                 let drgDivHandle = $(draggableDiv);
                 drgDivHandle.draggable({
                     revert: "invalid",
-                    cursor: "move"
+                    cursor: "move",
+                    backgroundColor: "lightyellow"
                 });
+                drgDivHandle.css("cursor", "move");
 
                 // Change the color of the row when hovered over
                 $(draggableDiv)
                     .mouseover(function() {
                         $(this).css("background-color", "lightyellow"); 
+                        
                     })
                     .mouseout(function() {
                         $(this).css("background-color", "");
@@ -131,6 +134,7 @@ function renderQuestion() {
                 droppableDiv.classList.add("ui-widget-content");
 
                 let drpDivHandle = $(droppableDiv);
+                
                 drpDivHandle.droppable({
                     accept: ".draggable",
                     drop: function(event, ui) {
@@ -157,6 +161,9 @@ function renderQuestion() {
                         // Remove the draggable element from the row
                         ui.draggable.remove();
 
+                        // Remove the droppable attribute from the droppable element
+                        $(this).droppable("destroy");
+
                         // Append the col-2 to the row
                         row.appendChild(col1);
 
@@ -165,8 +172,16 @@ function renderQuestion() {
                         if (dragDataArray.length > rowId) {
                             dragDataArray[rowId] = draggableId.split("-")[1];
                         }
+
+                        $(this).css("background-color", "lightblue");
+                    },
+                    over: function(event, ui) {
+                        $(this).css("background-color", "lightyellow");
+                    },
+                    out: function(event, ui) {
+                        $(this).css("background-color", "");
                     }
-                });
+            });
 
                 col2.appendChild(droppableDiv);
             }
@@ -323,8 +338,6 @@ function postAnswer(value) {
 function displaySelectionButtons() {
     let mainCol = document.getElementById("mainCol");
     mainCol.innerHTML = "";
-
-    let greenCircle = '\u1F7E2';
 
     renderHeader();
 
