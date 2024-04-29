@@ -55,3 +55,7 @@
 .quizPadding{
     padding-top: 25px;
 }
+
+#main {
+    min-height: 90vh;
+}
