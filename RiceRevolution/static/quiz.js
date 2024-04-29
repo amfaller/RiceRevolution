@@ -257,28 +257,27 @@ function renderQuestion() {
 
 function postDraggableAnswer() {
     // Check that the dragDataArray is equal to questionData.correctAnswerIdx
-    let correct = true;
+    let correctAnswerChosen = true;
     for (let i = 0; i < questionData.correctAnswerIdx.length; i++) {
         if (parseInt(dragDataArray[i]) != questionData.correctAnswerIdx[i]) {
-            correct = false;
+            correctAnswerChosen = false;
             break;
         }
     }
-    console.log("Correct: " + correct)
+    console.log("correctAnswerChosen: " + correctAnswerChosen)
 
-    if (correct) {
-        $.ajax({
-            url: "/submit_answer",
-            method: "POST",
-            dataType: "json",
-            contentType: "application/json",
-            data: JSON.stringify({
-                correct: true}),
-            success: function(data) {
-                console.log(data);
-            }
-            });
-    }
+    $.ajax({
+        url: "/submit_answer",
+        method: "POST",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify({
+            correct: correctAnswerChosen}),
+        success: function(data) {
+            console.log(data);
+        }
+        });
+    
 
     // Redirect to next question if not at max
     if (parseInt(questionData.id) < 5) {
@@ -293,20 +292,21 @@ function postDraggableAnswer() {
 }
 
 function postAnswer(value) {
-    if (value == questionData.correctAnswerIdx) {
-        // Publish via AJAX the current timestamp to the server
-        $.ajax({
-            url: "/submit_answer",
-            method: "POST",
-            dataType: "json",
-            contentType: "application/json",
-            data: JSON.stringify({
-                correct: true}),
-            success: function(data) {
-                console.log(data);
-            }
-        });
-    }
+    let correctAnswerChosen = value == questionData.correctAnswerIdx;
+    
+    // Publish via AJAX the current timestamp to the server
+    $.ajax({
+        url: "/submit_answer",
+        method: "POST",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify({
+            correct: correctAnswerChosen}),
+        success: function(data) {
+            console.log(data);
+        }
+    });
+        
 
     // Redirect to next question if not at max
     if (parseInt(questionData.id) < 5) {
@@ -323,6 +323,8 @@ function postAnswer(value) {
 function displaySelectionButtons() {
     let mainCol = document.getElementById("mainCol");
     mainCol.innerHTML = "";
+
+    let greenCircle = '\u1F7E2';
 
     renderHeader();
 
@@ -360,11 +362,22 @@ function displaySelectionButtons() {
             varietiesScoreRow.classList.add('row');
 
             const varScore = document.createElement('p');
-            varScore.innerText = "Previous score: " + varietiesQuizScore + "/" +  maxVarScore;
+            varScore.innerText = "Previous score: " + varietiesQuizScore + "/" +  maxVarScore + "   ";
+
+            // Iterate through varietiesQuizCorrectAnswers
+            // Display a green circle if the answer was correct (i.e. value 1)
+            // Display a red circle if the answer was incorrect (i.e. value 0)
+            // Use unicode representation of circle
+            for (let i = 0; i < varietiesQuizCorrectAnswers.length; i++) {
+                const correct = varietiesQuizCorrectAnswers[i];
+                const correctCircle = document.createElement('span');
+                correctCircle.innerText = '\u2B24';
+                correctCircle.style.color = correct ? 'green' : 'red';
+                varScore.appendChild(correctCircle);
+            }
+
             varietiesScoreRow.appendChild(varScore);
-
             varScoreCol.appendChild(varietiesScoreRow);
-
             varietiesQuizRow.appendChild(varScoreCol);
         }
 
@@ -405,11 +418,22 @@ function displaySelectionButtons() {
             cookingScoreRow.classList.add('row');
 
             const cooScore = document.createElement('p');
-            cooScore.innerText = "Previous score: " + cookingQuizScore + "/" +  maxCooScore;
+            cooScore.innerText = "Previous score: " + cookingQuizScore + "/" +  maxCooScore + "   ";
+
+            // Iterate through cookingQuizCorrectAnswers
+            // Display a green circle if the answer was correct (i.e. value 1)
+            // Display a red circle if the answer was incorrect (i.e. value 0)
+            // Use unicode representation of circle
+            for (let i = 0; i < cookingQuizCorrectAnswers.length; i++) {
+                const correct = cookingQuizCorrectAnswers[i];
+                const correctCircle = document.createElement('span');
+                correctCircle.innerText = '\u2B24';
+                correctCircle.style.color = correct ? 'green' : 'red';
+                cooScore.appendChild(correctCircle);
+            }
+
             cookingScoreRow.appendChild(cooScore);
-
             cookingScoreCol.appendChild(cookingScoreRow);
-
             cookingQuizRow.appendChild(cookingScoreCol);
         }
 

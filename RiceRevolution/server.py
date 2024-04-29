@@ -24,6 +24,10 @@ varietiesQuizScore = 0
 cookingQuizScore = 0
 maxScore = 0
 
+varietiesQuizCorrectAnswers = [0, 0, 0, 0, 0]
+cookingQuizCorrectAnswers = [0, 0, 0, 0, 0]
+answerArrayIdx = 0
+
 # Home page
 @app.route('/')
 def home():
@@ -121,7 +125,10 @@ def rice_cooker_step(step):
 def quiz():
    global varietiesQuizScore
    global cookingQuizScore
-   return render_template('quiz.html', questionData=None, varietiesQuizScore=varietiesQuizScore, cookingQuizScore=cookingQuizScore, maxVarScore=len(quizData_Varieties), maxCooScore=len(quizData_Cooking))
+   global varietiesQuizCorrectAnswers
+   global cookingQuizCorrectAnswers
+   
+   return render_template('quiz.html', questionData=None, varietiesQuizScore=varietiesQuizScore, cookingQuizScore=cookingQuizScore, maxVarScore=len(quizData_Varieties), maxCooScore=len(quizData_Cooking), varietiesQuizCorrectAnswers=varietiesQuizCorrectAnswers, cookingQuizCorrectAnswers=cookingQuizCorrectAnswers)
 
 # Per-question page
 @app.route('/quiz/<id>')
@@ -141,7 +148,7 @@ def quiz_question(id):
 
    if question is None:
       return "Question not found", 404
-   return render_template('quiz.html', questionData=question, varietiesQuizScore=None, cookingQuizScore=None, maxVarScore=None, maxCooScore=None)
+   return render_template('quiz.html', questionData=question, varietiesQuizScore=None, cookingQuizScore=None, maxVarScore=None, maxCooScore=None, varietiesQuizCorrectAnswers=None, cookingQuizCorrectAnswers=None)
 
 # Route for quiz selection
 @app.route('/quiz_selection', methods=['GET', 'POST'])
@@ -149,14 +156,21 @@ def quiz_selection():
    global quizId
    global varietiesQuizScore
    global cookingQuizScore
+   global varietiesQuizCorrectAnswers
+   global cookingQuizCorrectAnswers
+   global answerArrayIdx
+
+   answerArrayIdx = 0
    
    data = request.get_json()
    
    quizId = data['quiz']
    if quizId == 0:
       varietiesQuizScore = 0
+      varietiesQuizCorrectAnswers = [0, 0, 0, 0, 0]
    elif quizId == 1:
       cookingQuizScore = 0
+      cookingQuizCorrectAnswers = [0, 0, 0, 0, 0]
    return jsonify(data)
 
 # Route for answer submission
@@ -166,14 +180,19 @@ def submit_answer():
    global varietiesQuizScore
    global cookingQuizScore
    global maxScore
+   global varietiesQuizCorrectAnswers
+   global cookingQuizCorrectAnswers
+   global answerArrayIdx
 
    data = request.get_json()
    print(data)
    if quizId == 0:
       if data['correct']:
+         varietiesQuizCorrectAnswers[answerArrayIdx] = 1
          varietiesQuizScore += 1
    elif quizId == 1:
       if data['correct']:
+         cookingQuizCorrectAnswers[answerArrayIdx] = 1
          cookingQuizScore += 1
 
    if cookingQuizScore >= maxScore:
@@ -181,6 +200,12 @@ def submit_answer():
 
    if varietiesQuizScore >= maxScore:
       varietiesQuizScore = maxScore
+
+   answerArrayIdx += 1
+   
+   #TODO Delete
+   print(varietiesQuizCorrectAnswers)
+   print(cookingQuizCorrectAnswers)
 
    return jsonify(data)
 
