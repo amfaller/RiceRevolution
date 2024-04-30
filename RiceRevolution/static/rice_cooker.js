@@ -94,6 +94,7 @@ function renderPage() {
     mainColHandle.appendChild(row);
 
     // Render back and next buttons
+    functions.renderSpacingDiv();
     functions.displayButtons("/rice_cooker/");
 }
 
