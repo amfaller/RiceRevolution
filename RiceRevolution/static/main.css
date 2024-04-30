@@ -70,3 +70,8 @@
     padding: 20px 0px 20px 20px;
     font-size: larger;
 }
+
+#homeBanner {
+    width: 100%;
+    min-height:50vh
+}
