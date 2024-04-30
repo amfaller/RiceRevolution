@@ -389,6 +389,7 @@ function displaySelectionButtons() {
 
             const varScore = document.createElement('p');
             varScore.innerText = "Previous score: " + varietiesQuizScore + "/" +  maxVarScore + "   ";
+            varScore.classList.add('quizScore');
 
             if (varietiesQuizTaken)
             {
@@ -412,6 +413,12 @@ function displaySelectionButtons() {
 
         container.appendChild(varietiesQuizRow);
     }
+
+    // Insert a spacing div
+    let spacingDiv = document.createElement("div");
+    spacingDiv.classList.add("row");
+    spacingDiv.style.height = "6vh";
+    container.appendChild(spacingDiv);
 
     // Cooking Quiz
     {
@@ -448,6 +455,7 @@ function displaySelectionButtons() {
 
             const cooScore = document.createElement('p');
             cooScore.innerText = "Previous score: " + cookingQuizScore + "/" +  maxCooScore + "   ";
+            cooScore.classList.add('quizScore');
 
             if (cookingQuizTaken)
             {

@@ -78,3 +78,8 @@
     width: 100%;
     min-height:50vh
 }
+
+.quizScore {
+    -webkit-text-stroke: 1px black;
+    background-color: rgba(250, 202, 57, 0.2);
+}
