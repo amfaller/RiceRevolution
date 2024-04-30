@@ -56,9 +56,9 @@ function renderImageAndText() {
 
     // Create two col-6
     let col1 = document.createElement("div");
-    col1.setAttribute("class", "col-8 text-center");
+    col1.setAttribute("class", "col-12 text-center");
     let col2 = document.createElement("div");
-    col2.setAttribute("class", "col-4 text-left");
+    col2.setAttribute("class", "col-12 text-center");
 
     // Image
     {

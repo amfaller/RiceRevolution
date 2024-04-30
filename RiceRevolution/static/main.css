@@ -39,6 +39,7 @@
 }
 
 .nrcImage {
+    min-height: 50vh;
     max-height: 50vh;
     max-width: 100%;
     margin-top: 10px;
@@ -47,6 +48,7 @@
 }
 
 .rcImage {
+    min-height: 50vh;
     max-height: 50vh;
     max-width: 100%;
     margin-top: 10px;
@@ -63,12 +65,13 @@
 
 #varietyImage {
     width: 100%;
-    max-height: 70vh;
+    max-height: 50vh;
+    object-fit: contain;
 }
 
 #varietyText {
     padding: 20px 0px 20px 20px;
-    font-size: larger;
+    font-size: large;
 }
 
 #homeBanner {
