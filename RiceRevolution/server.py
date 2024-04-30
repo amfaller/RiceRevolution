@@ -28,6 +28,9 @@ varietiesQuizCorrectAnswers = [0, 0, 0, 0, 0]
 cookingQuizCorrectAnswers = [0, 0, 0, 0, 0]
 answerArrayIdx = 0
 
+varietiesQuizTaken = False
+cookingQuizTaken = False
+
 # Home page
 @app.route('/')
 def home():
@@ -127,8 +130,11 @@ def quiz():
    global cookingQuizScore
    global varietiesQuizCorrectAnswers
    global cookingQuizCorrectAnswers
+   global varietiesQuizTaken
+   global cookingQuizTaken
+
    
-   return render_template('quiz.html', questionData=None, varietiesQuizScore=varietiesQuizScore, cookingQuizScore=cookingQuizScore, maxVarScore=len(quizData_Varieties), maxCooScore=len(quizData_Cooking), varietiesQuizCorrectAnswers=varietiesQuizCorrectAnswers, cookingQuizCorrectAnswers=cookingQuizCorrectAnswers)
+   return render_template('quiz.html', questionData=None, varietiesQuizScore=varietiesQuizScore, cookingQuizScore=cookingQuizScore, maxVarScore=len(quizData_Varieties), maxCooScore=len(quizData_Cooking), varietiesQuizCorrectAnswers=varietiesQuizCorrectAnswers, cookingQuizCorrectAnswers=cookingQuizCorrectAnswers, varietiesQuizTaken=varietiesQuizTaken, cookingQuizTaken=cookingQuizTaken)
 
 # Per-question page
 @app.route('/quiz/<id>')
@@ -137,18 +143,22 @@ def quiz_question(id):
    global varietiesQuizScore
    global cookingQuizScore
    global maxScore
+   global varietiesQuizTaken
+   global cookingQuizTaken
 
    question = None
    if quizId == 0:
       question = quizData_Varieties.get(id)
       maxScore = len(quizData_Varieties)
+      varietiesQuizTaken = True
    elif quizId == 1:
       question = quizData_Cooking.get(id)
       maxScore = len(quizData_Cooking)
+      cookingQuizTaken = True
 
    if question is None:
       return "Question not found", 404
-   return render_template('quiz.html', questionData=question, varietiesQuizScore=None, cookingQuizScore=None, maxVarScore=None, maxCooScore=None, varietiesQuizCorrectAnswers=None, cookingQuizCorrectAnswers=None)
+   return render_template('quiz.html', questionData=question, varietiesQuizScore=None, cookingQuizScore=None, maxVarScore=None, maxCooScore=None, varietiesQuizCorrectAnswers=None, cookingQuizCorrectAnswers=None, varietiesQuizTaken=varietiesQuizTaken, cookingQuizTaken=cookingQuizTaken)
 
 # Route for quiz selection
 @app.route('/quiz_selection', methods=['GET', 'POST'])

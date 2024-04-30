@@ -390,16 +390,19 @@ function displaySelectionButtons() {
             const varScore = document.createElement('p');
             varScore.innerText = "Previous score: " + varietiesQuizScore + "/" +  maxVarScore + "   ";
 
-            // Iterate through varietiesQuizCorrectAnswers
-            // Display a green circle if the answer was correct (i.e. value 1)
-            // Display a red circle if the answer was incorrect (i.e. value 0)
-            // Use unicode representation of circle
-            for (let i = 0; i < varietiesQuizCorrectAnswers.length; i++) {
-                const correct = varietiesQuizCorrectAnswers[i];
-                const correctCircle = document.createElement('span');
-                correctCircle.innerText = '\u2B24';
-                correctCircle.style.color = correct ? 'green' : 'red';
-                varScore.appendChild(correctCircle);
+            if (varietiesQuizTaken)
+            {
+                // Iterate through varietiesQuizCorrectAnswers
+                // Display a green circle if the answer was correct (i.e. value 1)
+                // Display a red circle if the answer was incorrect (i.e. value 0)
+                // Use unicode representation of circle
+                for (let i = 0; i < varietiesQuizCorrectAnswers.length; i++) {
+                    const correct = varietiesQuizCorrectAnswers[i];
+                    const correctCircle = document.createElement('span');
+                    correctCircle.innerText = '\u2B24';
+                    correctCircle.style.color = correct ? 'green' : 'red';
+                    varScore.appendChild(correctCircle);
+                }
             }
 
             varietiesScoreRow.appendChild(varScore);
@@ -446,16 +449,19 @@ function displaySelectionButtons() {
             const cooScore = document.createElement('p');
             cooScore.innerText = "Previous score: " + cookingQuizScore + "/" +  maxCooScore + "   ";
 
-            // Iterate through cookingQuizCorrectAnswers
-            // Display a green circle if the answer was correct (i.e. value 1)
-            // Display a red circle if the answer was incorrect (i.e. value 0)
-            // Use unicode representation of circle
-            for (let i = 0; i < cookingQuizCorrectAnswers.length; i++) {
-                const correct = cookingQuizCorrectAnswers[i];
-                const correctCircle = document.createElement('span');
-                correctCircle.innerText = '\u2B24';
-                correctCircle.style.color = correct ? 'green' : 'red';
-                cooScore.appendChild(correctCircle);
+            if (cookingQuizTaken)
+            {
+                // Iterate through cookingQuizCorrectAnswers
+                // Display a green circle if the answer was correct (i.e. value 1)
+                // Display a red circle if the answer was incorrect (i.e. value 0)
+                // Use unicode representation of circle
+                for (let i = 0; i < cookingQuizCorrectAnswers.length; i++) {
+                    const correct = cookingQuizCorrectAnswers[i];
+                    const correctCircle = document.createElement('span');
+                    correctCircle.innerText = '\u2B24';
+                    correctCircle.style.color = correct ? 'green' : 'red';
+                    cooScore.appendChild(correctCircle);
+                }
             }
 
             cookingScoreRow.appendChild(cooScore);
