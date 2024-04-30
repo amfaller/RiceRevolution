@@ -341,6 +341,19 @@ function displaySelectionButtons() {
 
     renderHeader();
 
+    // Create a parent container to hold the buttons
+    let container = document.createElement("div");
+    container.setAttribute("class", "container d-flex flex-column justify-content-center");
+    container.setAttribute("id", "homeBanner");
+
+    // Set the background image
+    container.style.backgroundImage = "url('https://png.pngtree.com/thumb_back/fh260/back_our/20190621/ourmid/pngtree-taobao-tmall-rice-poster-banner-home-poster-template-image_189319.jpg')";
+    container.style.backgroundSize = "cover";
+    container.style.backgroundRepeat = "no-repeat";
+
+    // Right-pad the container
+    container.style.paddingRight = "20vw";
+
     // Varieties Quiz
     {
         const varietiesQuizRow = document.createElement('div');
@@ -394,7 +407,7 @@ function displaySelectionButtons() {
             varietiesQuizRow.appendChild(varScoreCol);
         }
 
-        mainCol.appendChild(varietiesQuizRow);
+        container.appendChild(varietiesQuizRow);
     }
 
     // Cooking Quiz
@@ -450,8 +463,9 @@ function displaySelectionButtons() {
             cookingQuizRow.appendChild(cookingScoreCol);
         }
 
-        mainCol.appendChild(cookingQuizRow);
+        container.appendChild(cookingQuizRow);
     }
+    mainCol.appendChild(container);
     functions.renderSpacingDiv();
 }
 
