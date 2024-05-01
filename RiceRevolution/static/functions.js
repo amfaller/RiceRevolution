@@ -318,10 +318,17 @@ function makeDroppable(element) {
 
 // Helper function to display the back and next buttons
 export function displayButtons(route) {
-    renderSpacingDiv();
+
+    // Remove the existing row holding the buttons, if it exists
+    let buttonRow = document.getElementById("buttonRow");
+    if (buttonRow) {
+        buttonRow.remove();
+    }
+
 
     let row = document.createElement("div");
     row.setAttribute("class", "row");
+    row.setAttribute("id", "buttonRow")
 
     nextRoute = route;
     if (numActionsNeededForNextStep == 0) {
@@ -431,7 +438,6 @@ export function displayButtons(route) {
     }
 
     document.getElementById("mainCol").appendChild(row);
-    renderSpacingDiv();
 }
 
 // Helper function to render a pre-sized top/bottom margin div

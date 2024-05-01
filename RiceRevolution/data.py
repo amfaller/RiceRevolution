@@ -42,7 +42,7 @@ imageData = {
     },
     "OpenPot" : {
         "id":"OpenPot",
-        "url":"https://img.freepik.com/premium-vector/open-stainless-steel-pan-transparent-glass-lid-isolated-background-realistic-3d-vector-illustration-cookware-kitchen-utensils-mockup_545793-2024.jpg",
+        "url":"https://png.pngtree.com/png-vector/20210702/ourlarge/pngtree-opened-stainless-steel-pot-png-image_3529363.jpg",
         "altText":"Open Pot Image"
     },
     "ClosedPot" : {
@@ -171,7 +171,7 @@ noRiceCookerSteps = {
         "step": "3",
         "subheader": "Place the pot or saucepan on the stovetop over medium heat. Bring the water to a boil, stir to ensure nothing sticks, then reduce the heat to low and cover the pot with a lid.",
         "instructions": "Drag the pot to the stove and turn on the heat.",
-        "images": ["OpenPot", "Stove"],
+        "images": ["ClosedPot", "Stove"],
         "clickable": [False, False],
         "draggable": [True, False],
         "droppable": [False, True]
@@ -180,7 +180,7 @@ noRiceCookerSteps = {
         "id": "4",
         "step": "4",
         "subheader": "Allow the rice to simmer for the recommended cooking time, typically 15-20 minutes. Avoid lifting the lid while the rice is cooking to prevent steam from escaping.",
-        "instructions": "Set the timer and wait for the rice to cook.",
+        "instructions": "",
         "images": ["ClosedPot", "Stove"],
         "clickable": [False, False],
         "draggable": [False, False],
@@ -234,7 +234,7 @@ noRiceCookerSteps_Congee = {
         "step": "3",
         "subheader": "Place the pot or saucepan on the stovetop over medium heat. Bring the water to a boil, stir to ensure nothing sticks, then reduce the heat to low and cover the pot with a lid.",
         "instructions": "Drag the pot to the stove and turn on the heat.",
-        "images": ["OpenPot", "Stove"],
+        "images": ["ClosedPot", "Stove"],
         "clickable": [False, False],
         "draggable": [True, False],
         "droppable": [False, True]
@@ -298,7 +298,7 @@ noRiceCookerSteps_Crispy = {
         "step": "3",
         "subheader": "Place the pot or saucepan on the stovetop over medium heat. Bring the water to a boil, stir to ensure nothing sticks, then reduce the heat to low and cover the pot with a lid.",
         "instructions": "Drag the pot to the stove and turn on the heat.",
-        "images": ["OpenPot", "Stove"],
+        "images": ["ClosedPot", "Stove"],
         "clickable": [False, False],
         "draggable": [True, False],
         "droppable": [False, True]

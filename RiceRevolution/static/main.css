@@ -39,19 +39,47 @@
 }
 
 .nrcImage {
-    width: 100%;
-    height: auto;
+    min-height: 50vh;
+    max-height: 50vh;
+    max-width: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
+    
 }
 
 .rcImage {
-    width: 100%;
-    height: auto;
+    min-height: 50vh;
+    max-height: 50vh;
+    max-width: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
 .quizPadding{
     padding-top: 25px;
+}
+
+#main {
+    min-height: 90vh;
+}
+
+#varietyImage {
+    width: 100%;
+    max-height: 50vh;
+    object-fit: contain;
+}
+
+#varietyText {
+    padding: 20px 0px 20px 20px;
+    font-size: large;
+}
+
+#homeBanner {
+    width: 100%;
+    min-height:50vh
+}
+
+.quizScore {
+    -webkit-text-stroke: 1px black;
+    background-color: rgba(250, 202, 57, 0.2);
 }

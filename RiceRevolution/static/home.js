@@ -57,6 +57,16 @@ function renderButtons() {
     // Get the div with ID mainCol
     let mainColHandle = document.getElementById("mainCol");
 
+    // Create a parent container to hold the buttons
+    let container = document.createElement("div");
+    container.setAttribute("class", "container d-flex flex-column justify-content-center");
+    container.setAttribute("id", "homeBanner");
+
+    // Set the background image
+    container.style.backgroundImage = "url('https://png.pngtree.com/thumb_back/fh260/back_our/20190621/ourmid/pngtree-taobao-tmall-rice-poster-banner-home-poster-template-image_189319.jpg')";
+    container.style.backgroundSize = "cover";
+    container.style.backgroundRepeat = "no-repeat";
+
     let numButtons = 3;
     let buttonNames = ["Varieties", "No Rice Cooker", "Rice Cooker"];
     let buttonLinks = ["/varieties", "/no_rice_cooker", "/rice_cooker"];   
@@ -86,6 +96,9 @@ function renderButtons() {
 
         col.appendChild(button);
         row.appendChild(col);
-        mainColHandle.appendChild(row);
+        container.appendChild(row);
     }
+
+    // Append the container to the mainCol
+    mainColHandle.appendChild(container);
 }
