@@ -3,7 +3,7 @@ import * as functions from './functions.js';
 // Per server.py:
 //  - 0 = Varieties
 //  - 1 = Cooking
-let quizType = 0;
+let quizType = quizId;
 
 $(document).ready(function() {
     functions.logData();

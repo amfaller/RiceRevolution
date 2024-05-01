@@ -132,9 +132,8 @@ def quiz():
    global cookingQuizCorrectAnswers
    global varietiesQuizTaken
    global cookingQuizTaken
-
    
-   return render_template('quiz.html', questionData=None, varietiesQuizScore=varietiesQuizScore, cookingQuizScore=cookingQuizScore, maxVarScore=len(quizData_Varieties), maxCooScore=len(quizData_Cooking), varietiesQuizCorrectAnswers=varietiesQuizCorrectAnswers, cookingQuizCorrectAnswers=cookingQuizCorrectAnswers, varietiesQuizTaken=varietiesQuizTaken, cookingQuizTaken=cookingQuizTaken)
+   return render_template('quiz.html', questionData=None, varietiesQuizScore=varietiesQuizScore, cookingQuizScore=cookingQuizScore, maxVarScore=len(quizData_Varieties), maxCooScore=len(quizData_Cooking), varietiesQuizCorrectAnswers=varietiesQuizCorrectAnswers, cookingQuizCorrectAnswers=cookingQuizCorrectAnswers, varietiesQuizTaken=varietiesQuizTaken, cookingQuizTaken=cookingQuizTaken, quizId=None)
 
 # Per-question page
 @app.route('/quiz/<id>')
@@ -145,6 +144,7 @@ def quiz_question(id):
    global maxScore
    global varietiesQuizTaken
    global cookingQuizTaken
+   global quizId
 
    question = None
    if quizId == 0:
@@ -158,7 +158,7 @@ def quiz_question(id):
 
    if question is None:
       return "Question not found", 404
-   return render_template('quiz.html', questionData=question, varietiesQuizScore=None, cookingQuizScore=None, maxVarScore=None, maxCooScore=None, varietiesQuizCorrectAnswers=None, cookingQuizCorrectAnswers=None, varietiesQuizTaken=varietiesQuizTaken, cookingQuizTaken=cookingQuizTaken)
+   return render_template('quiz.html', questionData=question, varietiesQuizScore=None, cookingQuizScore=None, maxVarScore=None, maxCooScore=None, varietiesQuizCorrectAnswers=None, cookingQuizCorrectAnswers=None, varietiesQuizTaken=varietiesQuizTaken, cookingQuizTaken=cookingQuizTaken, quizId=quizId)
 
 # Route for quiz selection
 @app.route('/quiz_selection', methods=['GET', 'POST'])

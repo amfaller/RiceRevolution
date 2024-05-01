@@ -7,6 +7,9 @@ The purpose of this website is to teach a user a simple task in about 10 minutes
 1. In your terminal, run the command `python3 server.py`
 2. Navigate to [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
+## Demo
+A demo video is available here: [https://youtu.be/igVsP47BU7c](https://youtu.be/igVsP47BU7c)
+
 ## Tech Stack
 
 This website was implemented using the following technologies:
