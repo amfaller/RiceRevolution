@@ -106,13 +106,16 @@ function renderQuestion() {
                 let drgDivHandle = $(draggableDiv);
                 drgDivHandle.draggable({
                     revert: "invalid",
-                    cursor: "move"
+                    cursor: "move",
+                    backgroundColor: "lightyellow"
                 });
+                drgDivHandle.css("cursor", "move");
 
                 // Change the color of the row when hovered over
                 $(draggableDiv)
                     .mouseover(function() {
                         $(this).css("background-color", "lightyellow"); 
+                        
                     })
                     .mouseout(function() {
                         $(this).css("background-color", "");
@@ -131,6 +134,7 @@ function renderQuestion() {
                 droppableDiv.classList.add("ui-widget-content");
 
                 let drpDivHandle = $(droppableDiv);
+                
                 drpDivHandle.droppable({
                     accept: ".draggable",
                     drop: function(event, ui) {
@@ -157,6 +161,9 @@ function renderQuestion() {
                         // Remove the draggable element from the row
                         ui.draggable.remove();
 
+                        // Remove the droppable attribute from the droppable element
+                        $(this).droppable("destroy");
+
                         // Append the col-2 to the row
                         row.appendChild(col1);
 
@@ -165,8 +172,16 @@ function renderQuestion() {
                         if (dragDataArray.length > rowId) {
                             dragDataArray[rowId] = draggableId.split("-")[1];
                         }
+
+                        $(this).css("background-color", "lightblue");
+                    },
+                    over: function(event, ui) {
+                        $(this).css("background-color", "lightyellow");
+                    },
+                    out: function(event, ui) {
+                        $(this).css("background-color", "");
                     }
-                });
+            });
 
                 col2.appendChild(droppableDiv);
             }
@@ -257,28 +272,27 @@ function renderQuestion() {
 
 function postDraggableAnswer() {
     // Check that the dragDataArray is equal to questionData.correctAnswerIdx
-    let correct = true;
+    let correctAnswerChosen = true;
     for (let i = 0; i < questionData.correctAnswerIdx.length; i++) {
         if (parseInt(dragDataArray[i]) != questionData.correctAnswerIdx[i]) {
-            correct = false;
+            correctAnswerChosen = false;
             break;
         }
     }
-    console.log("Correct: " + correct)
+    console.log("correctAnswerChosen: " + correctAnswerChosen)
 
-    if (correct) {
-        $.ajax({
-            url: "/submit_answer",
-            method: "POST",
-            dataType: "json",
-            contentType: "application/json",
-            data: JSON.stringify({
-                correct: true}),
-            success: function(data) {
-                console.log(data);
-            }
-            });
-    }
+    $.ajax({
+        url: "/submit_answer",
+        method: "POST",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify({
+            correct: correctAnswerChosen}),
+        success: function(data) {
+            console.log(data);
+        }
+        });
+    
 
     // Redirect to next question if not at max
     if (parseInt(questionData.id) < 5) {
@@ -293,20 +307,21 @@ function postDraggableAnswer() {
 }
 
 function postAnswer(value) {
-    if (value == questionData.correctAnswerIdx) {
-        // Publish via AJAX the current timestamp to the server
-        $.ajax({
-            url: "/submit_answer",
-            method: "POST",
-            dataType: "json",
-            contentType: "application/json",
-            data: JSON.stringify({
-                correct: true}),
-            success: function(data) {
-                console.log(data);
-            }
-        });
-    }
+    let correctAnswerChosen = value == questionData.correctAnswerIdx;
+    
+    // Publish via AJAX the current timestamp to the server
+    $.ajax({
+        url: "/submit_answer",
+        method: "POST",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify({
+            correct: correctAnswerChosen}),
+        success: function(data) {
+            console.log(data);
+        }
+    });
+        
 
     // Redirect to next question if not at max
     if (parseInt(questionData.id) < 5) {
@@ -325,6 +340,19 @@ function displaySelectionButtons() {
     mainCol.innerHTML = "";
 
     renderHeader();
+
+    // Create a parent container to hold the buttons
+    let container = document.createElement("div");
+    container.setAttribute("class", "container d-flex flex-column justify-content-center");
+    container.setAttribute("id", "homeBanner");
+
+    // Set the background image
+    container.style.backgroundImage = "url('https://png.pngtree.com/thumb_back/fh260/back_our/20190621/ourmid/pngtree-taobao-tmall-rice-poster-banner-home-poster-template-image_189319.jpg')";
+    container.style.backgroundSize = "cover";
+    container.style.backgroundRepeat = "no-repeat";
+
+    // Right-pad the container
+    container.style.paddingRight = "20vw";
 
     // Varieties Quiz
     {
@@ -352,6 +380,7 @@ function displaySelectionButtons() {
         }
 
         // Score
+        if (varietiesQuizTaken)
         {
             const varScoreCol = document.createElement('div');
             varScoreCol.classList.add('col-6');
@@ -360,16 +389,34 @@ function displaySelectionButtons() {
             varietiesScoreRow.classList.add('row');
 
             const varScore = document.createElement('p');
-            varScore.innerText = "Previous score: " + varietiesQuizScore + "/" +  maxVarScore;
+            varScore.innerText = "Previous score: " + varietiesQuizScore + "/" +  maxVarScore + "   ";
+            varScore.classList.add('quizScore');
+            
+            // Iterate through varietiesQuizCorrectAnswers
+            // Display a green circle if the answer was correct (i.e. value 1)
+            // Display a red circle if the answer was incorrect (i.e. value 0)
+            // Use unicode representation of circle
+            for (let i = 0; i < varietiesQuizCorrectAnswers.length; i++) {
+                const correct = varietiesQuizCorrectAnswers[i];
+                const correctCircle = document.createElement('span');
+                correctCircle.innerText = '\u2B24';
+                correctCircle.style.color = correct ? 'green' : 'red';
+                varScore.appendChild(correctCircle);
+            }
+            
             varietiesScoreRow.appendChild(varScore);
-
             varScoreCol.appendChild(varietiesScoreRow);
-
             varietiesQuizRow.appendChild(varScoreCol);
         }
 
-        mainCol.appendChild(varietiesQuizRow);
+        container.appendChild(varietiesQuizRow);
     }
+
+    // Insert a spacing div
+    let spacingDiv = document.createElement("div");
+    spacingDiv.classList.add("row");
+    spacingDiv.style.height = "6vh";
+    container.appendChild(spacingDiv);
 
     // Cooking Quiz
     {
@@ -397,6 +444,7 @@ function displaySelectionButtons() {
         }
 
         // Score
+        if (cookingQuizTaken)
         {
             const cookingScoreCol = document.createElement('div');
             cookingScoreCol.classList.add('col-6');
@@ -405,16 +453,29 @@ function displaySelectionButtons() {
             cookingScoreRow.classList.add('row');
 
             const cooScore = document.createElement('p');
-            cooScore.innerText = "Previous score: " + cookingQuizScore + "/" +  maxCooScore;
+            cooScore.innerText = "Previous score: " + cookingQuizScore + "/" +  maxCooScore + "   ";
+            cooScore.classList.add('quizScore');
+
+            // Iterate through cookingQuizCorrectAnswers
+            // Display a green circle if the answer was correct (i.e. value 1)
+            // Display a red circle if the answer was incorrect (i.e. value 0)
+            // Use unicode representation of circle
+            for (let i = 0; i < cookingQuizCorrectAnswers.length; i++) {
+                const correct = cookingQuizCorrectAnswers[i];
+                const correctCircle = document.createElement('span');
+                correctCircle.innerText = '\u2B24';
+                correctCircle.style.color = correct ? 'green' : 'red';
+                cooScore.appendChild(correctCircle);
+            }
+        
             cookingScoreRow.appendChild(cooScore);
-
             cookingScoreCol.appendChild(cookingScoreRow);
-
             cookingQuizRow.appendChild(cookingScoreCol);
         }
 
-        mainCol.appendChild(cookingQuizRow);
+        container.appendChild(cookingQuizRow);
     }
+    mainCol.appendChild(container);
     functions.renderSpacingDiv();
 }
 

@@ -11,7 +11,9 @@ function renderVariety() {
 
     renderHeader();
     renderImageAndText();
+    functions.renderSpacingDiv();
     renderBackButton();
+    functions.renderSpacingDiv();
 }
 
 function renderHeader() {
@@ -45,47 +47,50 @@ function renderHeader() {
 function renderImageAndText() {
     let mainColHandle = document.getElementById("mainCol");
 
+    functions.renderSpacingDiv();
+
+    // Row and two col-6
+    // Create a row
+    let row = document.createElement("div");
+    row.setAttribute("class", "row");
+
+    // Create two col-6
+    let col1 = document.createElement("div");
+    col1.setAttribute("class", "col-12 text-center");
+    let col2 = document.createElement("div");
+    col2.setAttribute("class", "col-12 text-center");
+
     // Image
     {
-        // Create a row for the image
-        let row = document.createElement("div");
-        row.setAttribute("class", "row");
-
-        // Create a column for the image
-        let col = document.createElement("div");
-        col.setAttribute("class", "col text-center");
-
         // Create the image
         let image = document.createElement("img");
         image.src = varietyData.url;
+        image.id = "varietyImage";
 
         image.setAttribute("class", "varietyImage");
 
         // Append the image
-        col.appendChild(image);
-        row.appendChild(col);
-        mainColHandle.appendChild(row);
+        col1.appendChild(image);
     }
 
     // Text
     {
-        // Create a row for the text
-        let row = document.createElement("div");
-        row.setAttribute("class", "row");
-
-        // Create a column for the text
-        let col = document.createElement("div");
-        col.setAttribute("class", "col text-center");
-
         // Create the text
         let text = document.createElement("p");
         text.innerHTML = varietyData.desc;
 
+        text.id = "varietyText";
+
         // Append the text
-        col.appendChild(text);
-        row.appendChild(col);
-        mainColHandle.appendChild(row);
+        col2.appendChild(text);
     }
+
+    // Append the columns to the row
+    row.appendChild(col1);
+    row.appendChild(col2);
+
+    // Append the row to the mainCol
+    mainColHandle.appendChild(row);
 }
 
 function renderBackButton() {
