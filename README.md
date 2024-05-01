@@ -1,7 +1,13 @@
 # RiceRevolution
 Repo for the final project of COMS W4170 in Spring 2024.
 
-The purpose of this website is to teach a user a simple task in ~10 minutes of total viewing/interaction time. This includes some form of knowledge check / quiz.
+The purpose of this website is to teach a user a simple task in about 10 minutes of total viewing/interaction time. This includes some form of knowledge check / quiz.
+
+## Instructions for Running
+1. In your terminal, run the command `python3 server.py`
+2. Navigate to [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+
+## Tech Stack
 
 This website was implemented using the following technologies:
 * HTML
@@ -10,9 +16,7 @@ This website was implemented using the following technologies:
 * Bootstrap
 * JQuery
 * AJAX
-* ChatGPT
-* Bing Copilot
-* Github Copilot
+* Flask
 
 ## Topic
 
