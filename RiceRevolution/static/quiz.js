@@ -380,6 +380,7 @@ function displaySelectionButtons() {
         }
 
         // Score
+        if (varietiesQuizTaken)
         {
             const varScoreCol = document.createElement('div');
             varScoreCol.classList.add('col-6');
@@ -390,22 +391,19 @@ function displaySelectionButtons() {
             const varScore = document.createElement('p');
             varScore.innerText = "Previous score: " + varietiesQuizScore + "/" +  maxVarScore + "   ";
             varScore.classList.add('quizScore');
-
-            if (varietiesQuizTaken)
-            {
-                // Iterate through varietiesQuizCorrectAnswers
-                // Display a green circle if the answer was correct (i.e. value 1)
-                // Display a red circle if the answer was incorrect (i.e. value 0)
-                // Use unicode representation of circle
-                for (let i = 0; i < varietiesQuizCorrectAnswers.length; i++) {
-                    const correct = varietiesQuizCorrectAnswers[i];
-                    const correctCircle = document.createElement('span');
-                    correctCircle.innerText = '\u2B24';
-                    correctCircle.style.color = correct ? 'green' : 'red';
-                    varScore.appendChild(correctCircle);
-                }
+            
+            // Iterate through varietiesQuizCorrectAnswers
+            // Display a green circle if the answer was correct (i.e. value 1)
+            // Display a red circle if the answer was incorrect (i.e. value 0)
+            // Use unicode representation of circle
+            for (let i = 0; i < varietiesQuizCorrectAnswers.length; i++) {
+                const correct = varietiesQuizCorrectAnswers[i];
+                const correctCircle = document.createElement('span');
+                correctCircle.innerText = '\u2B24';
+                correctCircle.style.color = correct ? 'green' : 'red';
+                varScore.appendChild(correctCircle);
             }
-
+            
             varietiesScoreRow.appendChild(varScore);
             varScoreCol.appendChild(varietiesScoreRow);
             varietiesQuizRow.appendChild(varScoreCol);
@@ -446,6 +444,7 @@ function displaySelectionButtons() {
         }
 
         // Score
+        if (cookingQuizTaken)
         {
             const cookingScoreCol = document.createElement('div');
             cookingScoreCol.classList.add('col-6');
@@ -457,21 +456,18 @@ function displaySelectionButtons() {
             cooScore.innerText = "Previous score: " + cookingQuizScore + "/" +  maxCooScore + "   ";
             cooScore.classList.add('quizScore');
 
-            if (cookingQuizTaken)
-            {
-                // Iterate through cookingQuizCorrectAnswers
-                // Display a green circle if the answer was correct (i.e. value 1)
-                // Display a red circle if the answer was incorrect (i.e. value 0)
-                // Use unicode representation of circle
-                for (let i = 0; i < cookingQuizCorrectAnswers.length; i++) {
-                    const correct = cookingQuizCorrectAnswers[i];
-                    const correctCircle = document.createElement('span');
-                    correctCircle.innerText = '\u2B24';
-                    correctCircle.style.color = correct ? 'green' : 'red';
-                    cooScore.appendChild(correctCircle);
-                }
+            // Iterate through cookingQuizCorrectAnswers
+            // Display a green circle if the answer was correct (i.e. value 1)
+            // Display a red circle if the answer was incorrect (i.e. value 0)
+            // Use unicode representation of circle
+            for (let i = 0; i < cookingQuizCorrectAnswers.length; i++) {
+                const correct = cookingQuizCorrectAnswers[i];
+                const correctCircle = document.createElement('span');
+                correctCircle.innerText = '\u2B24';
+                correctCircle.style.color = correct ? 'green' : 'red';
+                cooScore.appendChild(correctCircle);
             }
-
+        
             cookingScoreRow.appendChild(cooScore);
             cookingScoreCol.appendChild(cookingScoreRow);
             cookingQuizRow.appendChild(cookingScoreCol);
